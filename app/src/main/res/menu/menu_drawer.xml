@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/menu_drawer_item_search"
+        android:icon="@drawable/ic_search_information"
+        android:title="货物信息"
+        />
+    <item
+        android:id="@+id/menu_drawer_item_send"
+        android:icon="@drawable/ic_send"
+        android:title="派送导航"
+        />
+
+</menu>
