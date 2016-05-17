@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import example.com.expressapp.ActivityList;
 import example.com.expressapp.R;
 import example.com.expressapp.basispage.view.BasisPageActivity;
 
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        ActivityList.addActivity(LoginActivity.this);
         initViews();
         if(sharedPreferences.getBoolean("REMEMBER_PASSWORD", true))
         {
@@ -143,8 +145,15 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
                 {
                     e.printStackTrace();
                 }*/
+                onLoginRight();
             }
         });
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        ActivityList.removeActivity(LoginActivity.this);
     }
     //当返回键被按下时调用
     @Override
@@ -160,7 +169,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
             Toast.makeText(LoginActivity.this,"再按一次退出",Toast.LENGTH_SHORT).show();
             exitTime=System.currentTimeMillis();
         }
-        else this.finish();
+        else ActivityList.exitAllActivity();
     }
     //初始化界面
     @Override

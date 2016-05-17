@@ -12,7 +12,12 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import example.com.expressapp.ActivityList;
 import example.com.expressapp.R;
+import example.com.expressapp.history.view.HistoryFragment;
+import example.com.expressapp.searchinformation.view.InformationFragment;
+import example.com.expressapp.send.view.SendFragment;
+import example.com.expressapp.setting.view.SettingFragment;
 
 public class BasisPageActivity extends AppCompatActivity {
 
@@ -26,17 +31,39 @@ public class BasisPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        ActivityList.addActivity(BasisPageActivity.this);
         initViews();
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item)
             {
+                switch (item.getItemId())
+                {
+                    case R.id.menu_drawer_item_send :
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content, new SendFragment()).commit();
+                        break;
+                    case R.id.menu_drawer_item_search:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new InformationFragment()).commit();
+                        break;
+                    case R.id.menu_drawer_item_history:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new HistoryFragment()).commit();
+                        break;
+                    case R.id.menu_drawer_item_setting:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new SettingFragment()).commit();
+                        break;
+                }
                 item.setChecked(true);
                 drawerLayout.closeDrawer(Gravity.LEFT);
                 return false;
             }
         });
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        ActivityList.removeActivity(BasisPageActivity.this);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -58,7 +85,7 @@ public class BasisPageActivity extends AppCompatActivity {
             Toast.makeText(BasisPageActivity.this,"再按一次退出",Toast.LENGTH_SHORT).show();
             exitTime=System.currentTimeMillis();
         }
-        else this.finish();
+        else ActivityList.exitAllActivity();
     }
     private void initViews()
     {
