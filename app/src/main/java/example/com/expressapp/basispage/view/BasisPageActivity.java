@@ -1,6 +1,7 @@
 package example.com.expressapp.basispage.view;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,19 +19,24 @@ public class BasisPageActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    private NavigationView navigationView;
     private double exitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        setContentView(R.layout.basispage_layout);
         initViews();
-        initToolbar();
-        actionBarDrawerToggle=new ActionBarDrawerToggle(BasisPageActivity.this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
-        actionBarDrawerToggle.syncState();
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item)
+            {
+                item.setChecked(true);
+                drawerLayout.closeDrawer(Gravity.LEFT);
+                return false;
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -56,9 +62,15 @@ public class BasisPageActivity extends AppCompatActivity {
     }
     private void initViews()
     {
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        setContentView(R.layout.basispage_layout);
         exitTime=0;
         toolbar=(Toolbar)findViewById(R.id.Toolbar);
-        drawerLayout=(DrawerLayout)findViewById(R.id.basispage_layout_content);
+        drawerLayout=(DrawerLayout)findViewById(R.id.basispage_layout_drawerlayout);
+        navigationView=(NavigationView)findViewById(R.id.basispage_layout_drawer);
+        initToolbar();
+        actionBarDrawerToggle=new ActionBarDrawerToggle(BasisPageActivity.this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
+        actionBarDrawerToggle.syncState();
     }
     private void initToolbar()
     {
