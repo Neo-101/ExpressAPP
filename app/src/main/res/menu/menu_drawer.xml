@@ -2,15 +2,29 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <item
-        android:id="@+id/menu_drawer_item_search"
-        android:icon="@drawable/ic_search_information"
-        android:title="货物信息"
-        />
-    <item
-        android:id="@+id/menu_drawer_item_send"
-        android:icon="@drawable/ic_send"
-        android:title="派送导航"
-        />
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_drawer_item_search"
+            android:icon="@drawable/ic_search_information"
+            android:title="货物信息"
+            />
+        <item
+            android:id="@+id/menu_drawer_item_send"
+            android:icon="@drawable/ic_send"
+            android:title="派送导航"
+            />
+        <item
+            android:id="@+id/menu_drawer_item_history"
+            android:icon="@drawable/ic_history"
+            android:title="派送足迹"
+            />
+        <item
+            android:id="@+id/menu_drawer_item_setting"
+            android:icon="@drawable/ic_setting"
+            android:title="系统设置"
+            />
+    </group>
+
 
 </menu>

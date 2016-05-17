@@ -1,6 +1,7 @@
 package example.com.expressapp.basispage.view;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,26 +12,58 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import example.com.expressapp.ActivityList;
 import example.com.expressapp.R;
+import example.com.expressapp.history.view.HistoryFragment;
+import example.com.expressapp.searchinformation.view.InformationFragment;
+import example.com.expressapp.send.view.SendFragment;
+import example.com.expressapp.setting.view.SettingFragment;
 
 public class BasisPageActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    private NavigationView navigationView;
     private double exitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        setContentView(R.layout.basispage_layout);
+        ActivityList.addActivity(BasisPageActivity.this);
         initViews();
-        initToolbar();
-        actionBarDrawerToggle=new ActionBarDrawerToggle(BasisPageActivity.this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
-        actionBarDrawerToggle.syncState();
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item)
+            {
+                switch (item.getItemId())
+                {
+                    case R.id.menu_drawer_item_send :
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content, new SendFragment()).commit();
+                        break;
+                    case R.id.menu_drawer_item_search:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new InformationFragment()).commit();
+                        break;
+                    case R.id.menu_drawer_item_history:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new HistoryFragment()).commit();
+                        break;
+                    case R.id.menu_drawer_item_setting:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new SettingFragment()).commit();
+                        break;
+                }
+                item.setChecked(true);
+                drawerLayout.closeDrawer(Gravity.LEFT);
+                return false;
+            }
+        });
+    }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        ActivityList.removeActivity(BasisPageActivity.this);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -52,13 +85,19 @@ public class BasisPageActivity extends AppCompatActivity {
             Toast.makeText(BasisPageActivity.this,"再按一次退出",Toast.LENGTH_SHORT).show();
             exitTime=System.currentTimeMillis();
         }
-        else this.finish();
+        else ActivityList.exitAllActivity();
     }
     private void initViews()
     {
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        setContentView(R.layout.basispage_layout);
         exitTime=0;
         toolbar=(Toolbar)findViewById(R.id.Toolbar);
-        drawerLayout=(DrawerLayout)findViewById(R.id.basispage_layout_content);
+        drawerLayout=(DrawerLayout)findViewById(R.id.basispage_layout_drawerlayout);
+        navigationView=(NavigationView)findViewById(R.id.basispage_layout_drawer);
+        initToolbar();
+        actionBarDrawerToggle=new ActionBarDrawerToggle(BasisPageActivity.this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
+        actionBarDrawerToggle.syncState();
     }
     private void initToolbar()
     {
