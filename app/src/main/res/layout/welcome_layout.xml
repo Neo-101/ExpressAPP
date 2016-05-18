@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/welcome_layout_view_pager"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        />
+    <LinearLayout
+        android:id="@+id/welcome_layout_point_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:src="@drawable/welcome_layout_point_selector"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_margin="15dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            />
+        <ImageView
+            android:src="@drawable/welcome_layout_point_selector"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_margin="15dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            />
+        <ImageView
+            android:src="@drawable/welcome_layout_point_selector"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_margin="15dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            />
+        <ImageView
+            android:src="@drawable/welcome_layout_point_selector"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_margin="15dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerInside"
+            android:clickable="true"
+            />
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/welcome_layout_AppCompatButton_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/welcome_layout_point_line"
+        android:layout_marginBottom="16dp"
+        android:layout_centerHorizontal="true"
+        android:text="   点击进入   "
+        android:textColor="@color/windowBackground"
+        android:textSize="16sp"
+        android:visibility="gone"/>
+
+</RelativeLayout>
