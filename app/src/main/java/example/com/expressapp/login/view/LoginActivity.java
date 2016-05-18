@@ -4,6 +4,8 @@ import android.animation.ValueAnimator;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -186,7 +188,9 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
         AppCompatButton_login=(AppCompatButton)findViewById(R.id.login_layout_AppCompatButton_login);
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.LOLLIPOP)       //当系统API小于21时
         {
-            AppCompatButton_login.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            ColorStateList list=getResources().getColorStateList(R.color.colorPrimary);
+            AppCompatButton_login.setSupportBackgroundTintList(list);
+            AppCompatButton_login.setSupportBackgroundTintMode(PorterDuff.Mode.SRC_IN);
         }
         SwitchCompat_rememberpassword=(SwitchCompat)findViewById(R.id.login_layout_SwitchCompat_rememberpassword);
     }
