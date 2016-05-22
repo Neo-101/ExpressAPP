@@ -2,6 +2,7 @@ package example.com.expressapp.basispage.view;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import example.com.expressapp.ActivityList;
+import example.com.expressapp.JJSearch.JJSearchView;
 import example.com.expressapp.R;
 import example.com.expressapp.history.view.HistoryFragment;
 import example.com.expressapp.searchinformation.view.InformationFragment;
@@ -115,6 +117,8 @@ public class BasisPageActivity extends AppCompatActivity {
                 {
                     case R.id.menu_toolbar_search:
                         Toast.makeText(BasisPageActivity.this,"Click Search",Toast.LENGTH_SHORT).show();
+                        JJSearchView jjSearchView=(JJSearchView) MenuItemCompat.getActionView(item);
+                        jjSearchView.startAnim();
                 }
                 return  true;
             }
