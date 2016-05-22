@@ -6,31 +6,30 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 
 import example.com.expressapp.R;
 
 /**
  * Created by lxs on 2016/5/20.
  */
-public class JJSearchView extends View
+public class JJSearchView extends android.support.v7.widget.SearchView
 {
     private Paint mPaint;
     private Path mPath;
     private JJBaseController mController;
-    public JJSearchView(Context context)
-    {
-        this(context,null);
+    public JJSearchView(Context context) {
+        this(context, null);
     }
 
     public JJSearchView(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public JJSearchView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
+
     private void init()
     {
         Log.d("TAG","init");
@@ -39,7 +38,6 @@ public class JJSearchView extends View
         mPath=new Path();
         mController=new JJCircleToSimpleLineController();
         mController.setSearchView(this);
-        this.findViewById(R.id.jjSearchView);
     }
     public void setController(JJBaseController controller)
     {
@@ -56,6 +54,7 @@ public class JJSearchView extends View
     @Override
     public void onDraw(Canvas canvas)
     {
+        super.onDraw(canvas);
         Log.d("TAG","onDraw");
         mController.draw(canvas,mPaint);
     }

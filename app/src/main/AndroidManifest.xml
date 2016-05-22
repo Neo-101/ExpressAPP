@@ -12,15 +12,15 @@
 
         </activity>
         <activity android:name=".basispage.view.BasisPageActivity">
-
-        </activity>
-        <activity android:name=".welcome.view.WelcomeActivity"></activity>
-        <activity android:name=".JJSearch.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".welcome.view.WelcomeActivity"></activity>
+        <activity android:name=".JJSearch.TestActivity">
+
         </activity>
     </application>
 

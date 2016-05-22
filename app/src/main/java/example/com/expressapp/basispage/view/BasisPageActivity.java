@@ -2,7 +2,6 @@ package example.com.expressapp.basispage.view;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +12,9 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
 import example.com.expressapp.ActivityList;
-import example.com.expressapp.JJSearch.JJSearchView;
 import example.com.expressapp.R;
 import example.com.expressapp.history.view.HistoryFragment;
 import example.com.expressapp.searchinformation.view.InformationFragment;
@@ -28,6 +28,7 @@ public class BasisPageActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
     private double exitTime;
+    private MaterialSearchView materialSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,6 +72,7 @@ public class BasisPageActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_toolbar,menu);
+        materialSearchView.setMenuItem(menu.findItem(R.id.menu_toolbar_search));
         return true;
     }
     @Override
@@ -97,6 +99,7 @@ public class BasisPageActivity extends AppCompatActivity {
         toolbar=(Toolbar)findViewById(R.id.Toolbar);
         drawerLayout=(DrawerLayout)findViewById(R.id.basispage_layout_drawerlayout);
         navigationView=(NavigationView)findViewById(R.id.basispage_layout_drawer);
+        materialSearchView=(MaterialSearchView)findViewById(R.id.basispage_layout_searchview) ;
         initToolbar();
         actionBarDrawerToggle=new ActionBarDrawerToggle(BasisPageActivity.this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
         actionBarDrawerToggle.syncState();
@@ -117,8 +120,6 @@ public class BasisPageActivity extends AppCompatActivity {
                 {
                     case R.id.menu_toolbar_search:
                         Toast.makeText(BasisPageActivity.this,"Click Search",Toast.LENGTH_SHORT).show();
-                        JJSearchView jjSearchView=(JJSearchView) MenuItemCompat.getActionView(item);
-                        jjSearchView.startAnim();
                 }
                 return  true;
             }
