@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
             EditText_password.getEditText().setText(sharedPreferences.getString("PASSWORD",""));
             SwitchCompat_rememberpassword.setChecked(true);
         }
+
         //当用户名输入框中的值改变时调用
         EditText_username.getEditText().addTextChangedListener(new TextWatcher()
         {
@@ -74,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
             @Override
             public void afterTextChanged(Editable s){}
         });
+
         //当用户名输入框中的清除按钮被点击时调用
         ImageButton_usernamedelete.setOnClickListener(new View.OnClickListener()
         {
@@ -101,6 +103,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
             @Override
             public void afterTextChanged(Editable s) {}
         });
+
         //当密码输入框中的清除按钮被点击时调用
         ImageButton_passworddelete.setOnClickListener(new View.OnClickListener()
         {
@@ -110,6 +113,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
                 EditText_password.getEditText().setText("");
             }
         });
+
         //当记住密码按钮被点击时调用
         SwitchCompat_rememberpassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
@@ -131,6 +135,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
 
             }
         });
+        
         //当登陆按钮被点击时调用
         AppCompatButton_login.setOnClickListener(new View.OnClickListener()
         {
@@ -151,18 +156,21 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
             }
         });
     }
+
     @Override
     protected void onDestroy()
     {
         super.onDestroy();
         ActivityList.removeActivity(LoginActivity.this);
     }
+
     //当返回键被按下时调用
     @Override
     public void onBackPressed()
     {
         exitAPP();
     }
+
     //退出APP
     private void exitAPP()
     {
@@ -173,6 +181,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
         }
         else ActivityList.exitAllActivity();
     }
+
     //初始化界面
     @Override
     public void initViews()
@@ -194,6 +203,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
         }
         SwitchCompat_rememberpassword=(SwitchCompat)findViewById(R.id.login_layout_SwitchCompat_rememberpassword);
     }
+
     //当登陆出错时调用
     @Override
     public void onLoginWrong()
@@ -207,6 +217,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
         EditText_username.getEditText().setTextColor(getResources().getColor(R.color.colorAccent));
         EditText_password.getEditText().setTextColor(getResources().getColor(R.color.colorAccent));
     }
+
     //当登陆成功时调用
     @Override
     public  void onLoginRight()
@@ -226,6 +237,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
         }
 
     }
+
     //加载图标
     @Override
     public void Login_loading()
@@ -234,6 +246,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
         ProgressBar progressBar=(ProgressBar) findViewById(R.id.login_layout_progressbar);
         progressBar.setVisibility(View.VISIBLE);
     }
+
     //屏幕变暗
     private void dimBackground(float from,float to)
     {
