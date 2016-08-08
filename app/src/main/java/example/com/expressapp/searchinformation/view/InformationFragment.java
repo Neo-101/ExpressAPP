@@ -3,22 +3,22 @@ package example.com.expressapp.searchinformation.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import example.com.expressapp.R;
+import example.com.expressapp.searchinformation.model.RecyclerViewAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class InformationFragment extends Fragment {
 
-
+    private RecyclerView mRecyclerView;
+    private RecyclerViewAdapter mAdapter;
     public InformationFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,5 +26,6 @@ public class InformationFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.information_fragment_layout, container, false);
     }
+
 
 }

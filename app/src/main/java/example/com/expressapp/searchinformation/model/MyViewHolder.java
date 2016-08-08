@@ -10,7 +10,7 @@ import example.com.expressapp.R;
  * Created by lxs on 2016/8/7.
  */
 public class MyViewHolder extends RecyclerView.ViewHolder {
-    CardView mCardView;
+    public CardView mCardView;
     public MyViewHolder(View itemView)
     {
         super(itemView);

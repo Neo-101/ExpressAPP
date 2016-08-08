@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="example.com.expressapp.searchinformation.view.InformationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/information_fragment_layout_recyclerview"
         android:layout_width="match_parent"
