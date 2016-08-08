@@ -6,19 +6,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/toolbar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/toolbar" />
+        <com.miguelcatalan.materialsearchview.MaterialSearchView
+            android:id="@+id/basispage_layout_searchview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
 
     <android.support.v4.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/basispage_layout_drawerlayout">
         <!--主界面-->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/basispage_layout_content">
-        </LinearLayout>
+        </RelativeLayout>
         <!--主菜单-->
         <android.support.design.widget.NavigationView
             android:id="@+id/basispage_layout_drawer"
@@ -31,5 +40,3 @@
             app:itemTextAppearance="@style/DrawerItemTextStyle" />
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
-
-

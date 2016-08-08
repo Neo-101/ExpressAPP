@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".welcome.view.WelcomeActivity">
+        <activity android:name=".welcome.view.WelcomeActivity"></activity>
+        <activity android:name=".JJSearch.TestActivity">
 
         </activity>
     </application>
