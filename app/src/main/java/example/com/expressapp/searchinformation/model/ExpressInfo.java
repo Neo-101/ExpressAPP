@@ -212,9 +212,21 @@ public class ExpressInfo {
             System.out.println(e.getMessage());
         }
     }
-
+    
     public void setIsDelivered(boolean isdelivered)//设置是否送达，送达为true，否则为false
     {
         isDelivered=isdelivered;
+    }
+
+    /**
+     * 用字符串来表示是否送达，“0”表示没有送的，“1”表示送达，跟彭锋相匹配。
+     * @param isdeliverd
+     */
+    public void setIsDelivered(String isdeliverd)
+    {
+        if(isdeliverd=="0")
+            isDelivered=false;
+        else
+            isDelivered=true;
     }
 }

@@ -16,9 +16,9 @@ public class ExpressInfoManager {
         expressInfoList=new LinkedList<>();
     }
 
-    public ExpressInfoManager(String userInfo)
+    public void setExpressInfoList(String userInfo)
     {
-        expressInfoList=DataServiceHelper.initData(userInfo);
+        expressInfoList=DataServiceHelper.setData(userInfo,expressInfoList);
     }
 
     /**

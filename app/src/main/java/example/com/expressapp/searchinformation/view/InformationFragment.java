@@ -3,6 +3,7 @@ package example.com.expressapp.searchinformation.view;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.ActionMode;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,14 +17,18 @@ import android.view.ViewGroup;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import android.os.Handler;
 
 import example.com.expressapp.R;
+import example.com.expressapp.adminGUID;
 import example.com.expressapp.searchinformation.model.ExpressInfoManager;
 import example.com.expressapp.searchinformation.model.ExpressInfo;
 import example.com.expressapp.searchinformation.model.RecyclerViewAdapter;
+import example.com.expressapp.searchinformation.presenter.GetInfoPresenterImpl;
+import example.com.expressapp.searchinformation.presenter.iGetInfoPresenter;
 
 
-public class InformationFragment extends Fragment{
+public class InformationFragment extends Fragment implements iInformation{
 
     private ActionMode mActionMode;
     static public Set<Integer> selectedItems=new HashSet<>();
@@ -31,11 +36,27 @@ public class InformationFragment extends Fragment{
     private TabLayout mTabLayout;
     private RecyclerViewAdapter mAdapter;
     private ExpressInfoManager mExpressInfoManager;
+    private adminGUID mGuid;
+    private iGetInfoPresenter iSearch;
+     private Handler handler=new Handler()
+    {
+        public void handleMessage(android.os.Message msg) {
+            if(msg.what==1)
+            {
+                mExpressInfoManager.setExpressInfoList(msg.obj.toString());
+                for(int i=0;i<mExpressInfoManager.getExpressInfoList().size();i++)
+                {
+                    Log.d("test",mExpressInfoManager.getExpressInfoList().get(i).getReceiverName());
+                }
+            }
+        };
+    };
 
 
-    public InformationFragment(ExpressInfoManager expressInfoManager) {
+    public InformationFragment(ExpressInfoManager expressInfoManager,adminGUID guid) {
         // Required empty public constructor
         this.mExpressInfoManager=expressInfoManager;
+        mGuid=guid;
         Date date4=new Date(116,10,20);
         Date date1=new Date(116,7,7);
         Date date2=new Date(116,5,6);
@@ -48,6 +69,12 @@ public class InformationFragment extends Fragment{
                     "市三山路12号","彭锋","13545603130","江苏省南京市三山路12号","2016080801",date3,true));
         mExpressInfoManager.addExpressInfo(new ExpressInfo("超大耳机",0.4f,"超大","卢竞择","16456123112","江苏省" +
                 "南京市软件大道35号","卢竞择","16456123112","江苏省南京市软件大道35号","2016080802",date4,false));
+        mExpressInfoManager.quickSortbyIdNum(0,mExpressInfoManager.getExpressInfoList().size()-1);
+    }
+
+    public String getGUID()
+    {
+        return mGuid.getGUID();
     }
 
     @Override
@@ -55,6 +82,9 @@ public class InformationFragment extends Fragment{
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         final View thisView=inflater.inflate(R.layout.information_fragment_layout,container,false);
+        iSearch=new GetInfoPresenterImpl(this);
+        iSearch.judgeGetLadingInfo(handler);
+        
         mAdapter=new RecyclerViewAdapter(this.getContext(), mExpressInfoManager);
 
         mTabLayout=(TabLayout)thisView.findViewById(R.id.information_fragment_layout_tablayout);
@@ -65,11 +95,11 @@ public class InformationFragment extends Fragment{
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if(tab.getText().equals("货物单号"))
-                    mExpressInfoManager.quickSortbyIdNum(0,mExpressInfoManager.getInfoNum()-1);
+                    mExpressInfoManager.quickSortbyIdNum(0,mExpressInfoManager.getExpressInfoList().size()-1);
                 else if(tab.getText().equals("接货时间"))
-                    mExpressInfoManager.quickSortbyIsDelivered(0,mExpressInfoManager.getInfoNum()-1);
+                    mExpressInfoManager.quickSortbyUpDataTime(0,mExpressInfoManager.getExpressInfoList().size()-1);
                 else if(tab.getText().equals("未派送"))
-                    mExpressInfoManager.quickSortbyUpDataTime(0,mExpressInfoManager.getInfoNum()-1);
+                    mExpressInfoManager.quickSortbyIsDelivered(0,mExpressInfoManager.getExpressInfoList().size()-1);
                 mAdapter.updateData(mExpressInfoManager);
             }
             @Override

@@ -16,6 +16,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import example.com.expressapp.ActivityList;
 import example.com.expressapp.R;
+import example.com.expressapp.adminGUID;
 import example.com.expressapp.history.view.HistoryFragment;
 import example.com.expressapp.searchinformation.model.ExpressInfoManager;
 import example.com.expressapp.searchinformation.view.InformationFragment;
@@ -24,6 +25,7 @@ import example.com.expressapp.setting.view.SettingFragment;
 
 public class BasisPageActivity extends AppCompatActivity {
 
+    private adminGUID guid;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -38,6 +40,7 @@ public class BasisPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityList.addActivity(BasisPageActivity.this);
         initViews();
+        guid=(adminGUID)getApplication();
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -49,7 +52,7 @@ public class BasisPageActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content, new SendFragment(mExpressInfoManager)).commit();
                         break;
                     case R.id.menu_drawer_item_search:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new InformationFragment(mExpressInfoManager)).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new InformationFragment(mExpressInfoManager,guid)).commit();
                         break;
                     case R.id.menu_drawer_item_history:
                         getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new HistoryFragment()).commit();
