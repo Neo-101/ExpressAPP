@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.os.Build;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,8 @@ import android.widget.Toast;
 import example.com.expressapp.ActivityList;
 import example.com.expressapp.R;
 import example.com.expressapp.basispage.view.BasisPageActivity;
+import example.com.expressapp.login.presenter.PresenterCompl;
+import example.com.expressapp.login.presenter.iLoginPresenter;
 
 
 public class LoginActivity extends AppCompatActivity implements i_LoginView
@@ -44,6 +47,24 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
     SwitchCompat SwitchCompat_rememberpassword;
     SharedPreferences sharedPreferences;
     private double exitTime;
+    private iLoginPresenter iLogin;//我写的
+
+    private Handler handler=new Handler(){//我写的
+        public void handleMessage(android.os.Message msg) {
+            if(msg.what==1)
+            {
+                if(msg.obj.toString().contains("success"))
+                {
+                    onLoginRight();
+                }
+                else
+                {
+                    onLoginWrong(msg.obj.toString());
+                }
+                LoginDismissing();
+            }
+        };
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,6 +72,9 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
         super.onCreate(savedInstanceState);
         ActivityList.addActivity(LoginActivity.this);
         initViews();
+
+        iLogin=new PresenterCompl(this);//w
+
         if(sharedPreferences.getBoolean("REMEMBER_PASSWORD", true))
         {
             EditText_username.getEditText().setText(sharedPreferences.getString("USERNAME",""));
@@ -152,7 +176,8 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
                 {
                     e.printStackTrace();
                 }*/
-                onLoginRight();
+                //onLoginRight();
+                iLogin.LoginJudge(handler);//我写的
             }
         });
     }
@@ -206,10 +231,10 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
 
     //当登陆出错时调用
     @Override
-    public void onLoginWrong()
+    public void onLoginWrong(String loginresult)
     {
         Snackbar snackbar_login;
-        snackbar_login=Snackbar.make(AppCompatButton_login.getRootView(),"用户名或密码错误",Snackbar.LENGTH_LONG);
+        snackbar_login=Snackbar.make(AppCompatButton_login.getRootView(),loginresult,Snackbar.LENGTH_LONG);
         Snackbar.SnackbarLayout ssl = (Snackbar.SnackbarLayout)snackbar_login.getView();
         ssl.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         ssl.setAlpha(0.7f);
@@ -240,11 +265,19 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
 
     //加载图标
     @Override
-    public void Login_loading()
+    public void LoginLoading()
     {
-        dimBackground(1.0f,0.8f);
+        dimBackground(1.0f,0.6f);
         ProgressBar progressBar=(ProgressBar) findViewById(R.id.login_layout_progressbar);
         progressBar.setVisibility(View.VISIBLE);
+    }
+
+    //消除加载图标
+    public void LoginDismissing()
+    {
+        dimBackground(0.6f,1.0f);
+        ProgressBar progressBar=(ProgressBar) findViewById(R.id.login_layout_progressbar);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
 
@@ -265,6 +298,18 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
             }
         });
         valueAnimator.start();
+    }
+
+    @Override
+    public String getUsername()
+    {
+        return EditText_username.getEditText().getText().toString();
+    }
+
+    @Override
+    public String getPassword()
+    {
+        return EditText_password.getEditText().getText().toString();
     }
 
 }

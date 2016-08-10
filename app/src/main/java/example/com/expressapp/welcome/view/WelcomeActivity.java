@@ -1,5 +1,6 @@
 package example.com.expressapp.welcome.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
 import android.os.Bundle;
@@ -15,13 +16,17 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.Toast;
 
+import example.com.expressapp.ActivityList;
 import example.com.expressapp.R;
 import example.com.expressapp.ViewPagerAdapter;
+import example.com.expressapp.login.view.LoginActivity;
 
 //第一次打开APP，引导界面
 public class WelcomeActivity extends AppCompatActivity
 {
+    private double exitTime;
     private ViewPager view_pager;     //页面切换控制组件
     private ImageView []point_list;   //存放四个小点对象的数组
     private ArrayList<View> viewpage_list;  //存放四个引导页面的链表
@@ -34,6 +39,7 @@ public class WelcomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        ActivityList.addActivity(WelcomeActivity.this);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.welcome_layout);
         init_viewpage();
@@ -124,7 +130,8 @@ public class WelcomeActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                //在这里添加进入按钮点击进入事件
+                final Intent intent=new Intent(WelcomeActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -139,4 +146,28 @@ public class WelcomeActivity extends AppCompatActivity
         AppCompatButton_start.setVisibility(View.INVISIBLE);
     }
 
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        ActivityList.removeActivity(WelcomeActivity.this);
+    }
+
+    //当返回键被按下时调用
+    @Override
+    public void onBackPressed()
+    {
+        exitAPP();
+    }
+
+    //退出APP
+    private void exitAPP()
+    {
+        if(System.currentTimeMillis()-exitTime>2000)
+        {
+            Toast.makeText(WelcomeActivity.this,"再按一次退出",Toast.LENGTH_SHORT).show();
+            exitTime=System.currentTimeMillis();
+        }
+        else ActivityList.exitAllActivity();
+    }
 }

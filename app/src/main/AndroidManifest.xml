@@ -9,19 +9,22 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity android:name=".login.view.LoginActivity">
-
         </activity>
         <activity android:name=".basispage.view.BasisPageActivity">
+        </activity>
+        <activity android:name=".welcome.view.WelcomeActivity"></activity>
+        <activity android:name=".JJSearch.TestActivity">
+
+        </activity>
+        <activity android:name=".welcome.presenter.JudgeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".welcome.view.WelcomeActivity"></activity>
-        <activity android:name=".JJSearch.TestActivity">
-
-        </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
