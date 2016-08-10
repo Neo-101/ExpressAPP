@@ -17,6 +17,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import example.com.expressapp.ActivityList;
 import example.com.expressapp.R;
 import example.com.expressapp.history.view.HistoryFragment;
+import example.com.expressapp.searchinformation.model.ExpressInfoManager;
 import example.com.expressapp.searchinformation.view.InformationFragment;
 import example.com.expressapp.send.view.SendFragment;
 import example.com.expressapp.setting.view.SettingFragment;
@@ -29,6 +30,7 @@ public class BasisPageActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private double exitTime;
     private MaterialSearchView materialSearchView;
+    private ExpressInfoManager mExpressInfoManager=new ExpressInfoManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,10 +46,10 @@ public class BasisPageActivity extends AppCompatActivity {
                 switch (item.getItemId())
                 {
                     case R.id.menu_drawer_item_send :
-                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content, new SendFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content, new SendFragment(mExpressInfoManager)).commit();
                         break;
                     case R.id.menu_drawer_item_search:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new InformationFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new InformationFragment(mExpressInfoManager)).commit();
                         break;
                     case R.id.menu_drawer_item_history:
                         getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new HistoryFragment()).commit();

@@ -247,6 +247,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
         progressBar.setVisibility(View.VISIBLE);
     }
 
+
     //屏幕变暗
     private void dimBackground(float from,float to)
     {

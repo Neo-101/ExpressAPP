@@ -20,6 +20,12 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#555555</item>
     </style>
+    <style name="ActionModeTextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:color">@color/colorPrimary</item>
+    </style>
+    <style name="ActionModeStyle" parent="Base.Widget.AppCompat.ActionMode">
+        <item name="android:titleTextStyle">@style/ActionModeTextStyle</item>
+    </style>
         
 
 </resources>

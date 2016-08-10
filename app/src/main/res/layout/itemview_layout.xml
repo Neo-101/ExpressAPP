@@ -10,13 +10,20 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:id="@+id/itemview_layout_cardview"
-        app:cardElevation="7dp"
+        app:cardElevation="4dp"
         app:cardCornerRadius="8dp"
         app:cardBackgroundColor="#ffffff"
         app:contentPadding="8dp">
-        <LinearLayout
+      <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:src="@drawable/drawer_background" />
+       <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -59,6 +66,15 @@
                 android:drawableLeft="@drawable/ic_cardview_address"
                 android:drawableTint="@color/colorPrimary"
                 android:text="江苏省南京市学则路125号"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginTop="6dp"
+                android:id="@+id/itemview_layout_updatetime_textview"
+                android:drawableLeft="@drawable/ic_cardview_updatetime"
+                android:drawableTint="@color/colorPrimary"
+                android:text="2016.8.5 11:20:20"
                 android:textSize="18sp"/>
         </LinearLayout>
 

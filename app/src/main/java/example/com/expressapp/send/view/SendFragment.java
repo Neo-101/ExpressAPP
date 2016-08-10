@@ -8,15 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import example.com.expressapp.R;
+import example.com.expressapp.searchinformation.model.ExpressInfoManager;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SendFragment extends Fragment {
+    ExpressInfoManager mExpressInfoManager;
 
 
-    public SendFragment() {
+    public SendFragment(ExpressInfoManager expressInfoManager) {
         // Required empty public constructor
+        this.mExpressInfoManager=expressInfoManager;
     }
 
 
