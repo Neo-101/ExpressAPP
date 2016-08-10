@@ -54,6 +54,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.setPhoneInfo(expressInfoTemp.getReceiverPhone());
         holder.setAddressInfo(expressInfoTemp.getReceiverAddress());
         holder.setUpdateTime(expressInfoTemp.getUpDataTime());
+        holder.setDelivered(expressInfoTemp.getIsDelivered());
         if(InformationFragment.selectedItems.contains(position))
             holder.setItemSelected();
         else holder.setItemUnselected();

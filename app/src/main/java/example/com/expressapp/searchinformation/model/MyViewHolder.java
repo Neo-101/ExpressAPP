@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import example.com.expressapp.R;
@@ -48,6 +49,15 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     {
         TextView updateTimeView=(TextView)mCardView.findViewById(R.id.itemview_layout_updatetime_textview);
         updateTimeView.setText(updateTime);
+    }
+
+    public void setDelivered(boolean isDelivered)
+    {
+        ImageView deliveredView=(ImageView)mCardView.findViewById(R.id.itemview_layout_delivered_imageview);
+        if(!isDelivered)
+            deliveredView.setVisibility(View.INVISIBLE);
+        else
+            deliveredView.setVisibility(View.VISIBLE);
     }
 
     public void click()

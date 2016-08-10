@@ -72,16 +72,10 @@ public class InformationFragment extends Fragment{
                     mExpressInfoManager.quickSortbyUpDataTime(0,mExpressInfoManager.getInfoNum()-1);
                 mAdapter.updateData(mExpressInfoManager);
             }
-
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
+            public void onTabUnselected(TabLayout.Tab tab) {}
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabReselected(TabLayout.Tab tab) {}
         });
 
         mRecyclerView=(RecyclerView) thisView.findViewById(R.id.information_fragment_layout_recyclerview);
