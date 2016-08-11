@@ -41,9 +41,14 @@ public class JudgeActivity extends Activity{
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (firstRun) {
-                        startActivity(intent);
-                        firstRun=false;
+                    try {
+                        Thread.sleep(1000);
+                        while (firstRun) {
+                            startActivity(intent);
+                            firstRun = false;
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
             }).start();
@@ -55,7 +60,7 @@ public class JudgeActivity extends Activity{
                 @Override
                 public void run() {
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(3000);
                         while (firstRun) {
                             startActivity(intent);
                             firstRun=false;

@@ -1,12 +1,4 @@
-package example.com.expressapp.login.model;
-
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-
+package example.com.expressapp.setting.model;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,18 +10,27 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class UploadUserInformationByPostService implements iPostBack
-{
+import example.com.expressapp.adminGUID;
+
+/**
+ * Created by lxs on 2016/5/17.
+ */
+public class LogoutPostBack implements iLogoutPostBack{
     @Override
-    public String save(String username,String password) throws Exception
+    public String logout(String adminGuid) throws Exception
     {
         String result;
-        HttpPost httpRequest=new HttpPost("http://172.28.159.124:8080/Express/AndroidLoginMethod");
+        HttpPost httpRequest=new HttpPost("http://"+ adminGUID.ipAddress+":8080/Express/AndroidLogoutMethod");
         //创建参数
         List<NameValuePair> params=new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("username", username));
-        params.add(new BasicNameValuePair("password", password));
+        params.add(new BasicNameValuePair("adminGUID", adminGuid));
         //params.add(new BasicNameValuePair("flag","0"));
         try {
             //对提交数据进行编码
@@ -40,7 +41,7 @@ public class UploadUserInformationByPostService implements iPostBack
                 //利用字节数组流和包装的绑定数据
                 byte[] data =new byte[128];
                 //先把从服务端来的数据转化成字节数组
-                data=EntityUtils.toByteArray((HttpEntity)httpResponse.getEntity());
+                data= EntityUtils.toByteArray((HttpEntity)httpResponse.getEntity());
                 //再创建字节数组输入流对象
                 ByteArrayInputStream bais = new ByteArrayInputStream(data);
                 //绑定字节流和数据包装流

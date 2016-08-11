@@ -1,16 +1,10 @@
 package example.com.expressapp.login.presenter;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import android.util.Printer;
-import android.widget.Toast;
 
-import example.com.expressapp.basispage.view.BasisPageActivity;
-import example.com.expressapp.login.model.UploadUserInformationByPostService;
+import example.com.expressapp.login.model.LoginPostBack;
 import example.com.expressapp.login.model.iPostBack;
-import example.com.expressapp.login.view.LoginActivity;
 import example.com.expressapp.login.view.i_LoginView;
 
 /**
@@ -27,7 +21,7 @@ public class PresenterCompl implements iLoginPresenter{
             public void run() {
                 String loginResult=new String();
                 try {
-                    loginResult = ipostback.save(iView.getUsername(), iView.getPassword());
+                    loginResult = ipostback.login(iView.getUsername(), iView.getPassword());
                 }
                 catch (Exception e)
                 {
@@ -43,6 +37,6 @@ public class PresenterCompl implements iLoginPresenter{
     public PresenterCompl(i_LoginView iView)
     {
         this.iView=iView;
-        this.ipostback=new UploadUserInformationByPostService();
+        this.ipostback=new LoginPostBack();
     }
 }

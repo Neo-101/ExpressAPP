@@ -17,6 +17,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.transition.Explode;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 
 import example.com.expressapp.ActivityList;
 import example.com.expressapp.R;
+import example.com.expressapp.adminGUID;
 import example.com.expressapp.basispage.view.BasisPageActivity;
 import example.com.expressapp.login.presenter.PresenterCompl;
 import example.com.expressapp.login.presenter.iLoginPresenter;
@@ -34,7 +36,6 @@ import example.com.expressapp.login.presenter.iLoginPresenter;
 
 public class LoginActivity extends AppCompatActivity implements i_LoginView
 {
-
     //EditText_username 用户名输入框
     //EditText_password 密码输入框
     //ImageButton_usernamedelete 用户名输入框清空按钮
@@ -47,14 +48,16 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
     SwitchCompat SwitchCompat_rememberpassword;
     SharedPreferences sharedPreferences;
     private double exitTime;
-    private iLoginPresenter iLogin;//我写的
+    private iLoginPresenter iLogin;
+    private adminGUID guid;
 
-    private Handler handler=new Handler(){//我写的
+    private Handler handler=new Handler(){
         public void handleMessage(android.os.Message msg) {
             if(msg.what==1)
             {
-                if(msg.obj.toString().contains("success"))
+                if(msg.obj.toString().length()==32)
                 {
+                    guid.setGUID(msg.obj.toString());
                     onLoginRight();
                 }
                 else
@@ -73,7 +76,8 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
         ActivityList.addActivity(LoginActivity.this);
         initViews();
 
-        iLogin=new PresenterCompl(this);//w
+        iLogin=new PresenterCompl(this);
+        guid=(adminGUID)getApplication();
 
         if(sharedPreferences.getBoolean("REMEMBER_PASSWORD", true))
         {
@@ -166,18 +170,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
             @Override
             public void onClick(View v)
             {
-                // String Login_result=new String();
-            /*    try
-                {
-
-                    Login_result=UploadUserInformationByPostService.save(EditText_username.getText().toString(), edittext_password.getText().toString());
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace();
-                }*/
-                //onLoginRight();
-                iLogin.LoginJudge(handler);//我写的
+                iLogin.LoginJudge(handler);
             }
         });
     }
@@ -234,7 +227,13 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
     public void onLoginWrong(String loginresult)
     {
         Snackbar snackbar_login;
-        snackbar_login=Snackbar.make(AppCompatButton_login.getRootView(),loginresult,Snackbar.LENGTH_LONG);
+        switch (loginresult)
+        {
+            case "1":snackbar_login=Snackbar.make(AppCompatButton_login.getRootView(),"该用户不存在",Snackbar.LENGTH_LONG);break;
+            case "2":snackbar_login=Snackbar.make(AppCompatButton_login.getRootView(),"密码不正确",Snackbar.LENGTH_LONG);break;
+            case "3":snackbar_login=Snackbar.make(AppCompatButton_login.getRootView(),"此用户已经登录",Snackbar.LENGTH_LONG);break;
+            default:snackbar_login=Snackbar.make(AppCompatButton_login.getRootView(),"存在一些未知异常",Snackbar.LENGTH_LONG);break;
+        }
         Snackbar.SnackbarLayout ssl = (Snackbar.SnackbarLayout)snackbar_login.getView();
         ssl.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         ssl.setAlpha(0.7f);

@@ -8,6 +8,7 @@ import android.util.Log;
  */
 public class adminGUID extends Application {
     private String GUID;
+    public static String ipAddress="172.168.0.1";
 
     public String getGUID()
     {
@@ -16,7 +17,6 @@ public class adminGUID extends Application {
 
     public void setGUID(String guid)
     {
-        Log.d("test","1");
         GUID=guid;
     }
 

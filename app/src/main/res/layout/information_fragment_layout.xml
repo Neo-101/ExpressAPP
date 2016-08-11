@@ -14,7 +14,11 @@
             android:id="@+id/information_fragment_layout_tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"/>
+            app:tabBackground="@color/colorPrimary"
+            app:tabMode="fixed"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabSelectedTextColor="@color/windowBackground"
+            app:tabTextColor="#bbffffff"/>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/information_fragment_layout_recyclerview"
             android:layout_width="match_parent"

@@ -38,7 +38,7 @@ public class InformationFragment extends Fragment implements iInformation{
     private ExpressInfoManager mExpressInfoManager;
     private adminGUID mGuid;
     private iGetInfoPresenter iSearch;
-     private Handler handler=new Handler()
+    private Handler handler=new Handler()
     {
         public void handleMessage(android.os.Message msg) {
             if(msg.what==1)
@@ -57,7 +57,7 @@ public class InformationFragment extends Fragment implements iInformation{
         // Required empty public constructor
         this.mExpressInfoManager=expressInfoManager;
         mGuid=guid;
-        Date date4=new Date(116,10,20);
+/*        Date date4=new Date(116,10,20);
         Date date1=new Date(116,7,7);
         Date date2=new Date(116,5,6);
         Date date3=new Date(116,6,2);
@@ -69,7 +69,7 @@ public class InformationFragment extends Fragment implements iInformation{
                     "市三山路12号","彭锋","13545603130","江苏省南京市三山路12号","2016080801",date3,true));
         mExpressInfoManager.addExpressInfo(new ExpressInfo("超大耳机",0.4f,"超大","卢竞择","16456123112","江苏省" +
                 "南京市软件大道35号","卢竞择","16456123112","江苏省南京市软件大道35号","2016080802",date4,false));
-        mExpressInfoManager.quickSortbyIdNum(0,mExpressInfoManager.getExpressInfoList().size()-1);
+*/        mExpressInfoManager.quickSortbyIdNum(0,mExpressInfoManager.getExpressInfoList().size()-1);
     }
 
     public String getGUID()

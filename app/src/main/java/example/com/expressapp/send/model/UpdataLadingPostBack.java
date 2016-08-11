@@ -1,4 +1,4 @@
-package example.com.expressapp.searchinformation.model;
+package example.com.expressapp.send.model;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,16 +22,16 @@ import example.com.expressapp.adminGUID;
 /**
  * Created by lxs on 2016/5/17.
  */
-public class getLadingInfoBack implements iGetLadingBack{
+public class UpdataLadingPostBack implements iUpdataLadingBack {
     @Override
-    public String getLadingInfo(String adminGuid,String startTime) throws Exception
+    public String updataLading(String adminGuid, String idNum) throws Exception
     {
         String result;
-        HttpPost httpRequest=new HttpPost("http://"+ adminGUID.ipAddress+":8080/Express/GetLadMsgMethod");
+        HttpPost httpRequest=new HttpPost("http://"+ adminGUID.ipAddress+":8080/Express/UpdataLadMsgMethod");
         //创建参数
         List<NameValuePair> params=new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("adminGUID", adminGuid));
-        params.add(new BasicNameValuePair("startTime", startTime));
+        params.add(new BasicNameValuePair("IDNum", idNum));
         //params.add(new BasicNameValuePair("flag","0"));
         try {
             //对提交数据进行编码
