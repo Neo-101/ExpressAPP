@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/windowBackground"
+    android:layout="@layout/preference_item">
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="基本设置">
+        <CheckBoxPreference
+            android:layout="@layout/preference_item"
+            android:summary="自动更新数据"
+            android:title="自动更新"
+            android:key="@string/checkBoxPreference"
+            android:icon="@drawable/ic_setting_update"
+            android:widgetLayout="@layout/preference_switchcompat"/>
+        <Preference
+            android:layout="@layout/preference_item"
+            android:summary="删除已缓存的快递及地图数据"
+            android:title="清空缓存"
+            android:icon="@drawable/ic_setting_clean"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="用户设置">
+        <Preference
+            android:layout="@layout/preference_item"
+            android:key="@string/personInfoPreference"
+            android:title="个人信息"
+            android:summary="用户的详细信息"
+            android:icon="@drawable/ic_setting_personinfo"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget"
+        android:title="其他说明">
+        <Preference
+            android:layout="@layout/preference_item"
+            android:summary="Version 1.0"
+            android:title="当前版本"
+            android:icon="@drawable/ic_setting_version"/>
+        <Preference
+            android:layout="@layout/preference_item"
+            android:summary="NJU  GIS开发自娱自乐"
+            android:title="开发团队"
+            android:icon="@drawable/ic_setting_team"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

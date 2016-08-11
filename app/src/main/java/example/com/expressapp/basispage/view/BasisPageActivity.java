@@ -71,10 +71,10 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
                         getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new InformationFragment(mExpressInfoManager,guid)).commit();
                         break;
                     case R.id.menu_drawer_item_history:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new HistoryFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new HistoryFragment(guid)).commit();
                         break;
                     case R.id.menu_drawer_item_setting:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new SettingFragment(guid)).commit();
+                        getFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new SettingFragment(guid)).commit();
                         break;
                 }
                 item.setChecked(true);

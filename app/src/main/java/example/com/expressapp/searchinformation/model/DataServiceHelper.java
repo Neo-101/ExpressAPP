@@ -16,6 +16,8 @@ public class DataServiceHelper {
         for(int i=0;i<data.length;i++)
         {
             String detailInfo[]=data[i].split("#");
+            if(detailInfo.length<6)
+                continue;
             ExpressInfo expressInfo=new ExpressInfo();
             expressInfo.setIdNum(detailInfo[0]);
             expressInfo.setUpDataTime(detailInfo[1]);

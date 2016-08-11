@@ -8,7 +8,7 @@ import android.util.Log;
  */
 public class adminGUID extends Application {
     private String GUID;
-    public static String ipAddress="172.168.0.1";
+    public static String ipAddress="172.26.52.66";
 
     public String getGUID()
     {

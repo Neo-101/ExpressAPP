@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
         iLogin=new PresenterCompl(this);
         guid=(adminGUID)getApplication();
 
-        if(sharedPreferences.getBoolean("REMEMBER_PASSWORD", true))
+        if(sharedPreferences.getBoolean("REMEMBER_PASSWORD", false))
         {
             EditText_username.getEditText().setText(sharedPreferences.getString("USERNAME",""));
             EditText_password.getEditText().setText(sharedPreferences.getString("PASSWORD",""));

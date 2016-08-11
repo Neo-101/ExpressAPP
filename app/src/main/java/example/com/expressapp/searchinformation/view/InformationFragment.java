@@ -48,6 +48,8 @@ public class InformationFragment extends Fragment implements iInformation{
                 {
                     Log.d("test",mExpressInfoManager.getExpressInfoList().get(i).getReceiverName());
                 }
+                mExpressInfoManager.quickSortbyIdNum(0,mExpressInfoManager.getExpressInfoList().size()-1);
+                mAdapter.updateData(mExpressInfoManager);
             }
         };
     };
@@ -69,7 +71,7 @@ public class InformationFragment extends Fragment implements iInformation{
                     "市三山路12号","彭锋","13545603130","江苏省南京市三山路12号","2016080801",date3,true));
         mExpressInfoManager.addExpressInfo(new ExpressInfo("超大耳机",0.4f,"超大","卢竞择","16456123112","江苏省" +
                 "南京市软件大道35号","卢竞择","16456123112","江苏省南京市软件大道35号","2016080802",date4,false));
-*/        mExpressInfoManager.quickSortbyIdNum(0,mExpressInfoManager.getExpressInfoList().size()-1);
+*/
     }
 
     public String getGUID()

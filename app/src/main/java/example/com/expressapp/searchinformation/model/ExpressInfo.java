@@ -224,7 +224,7 @@ public class ExpressInfo {
      */
     public void setIsDelivered(String isdeliverd)
     {
-        if(isdeliverd=="0")
+        if(isdeliverd.equals("0"))
             isDelivered=false;
         else
             isDelivered=true;

@@ -1,6 +1,8 @@
 package example.com.expressapp.send.view;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,8 @@ public class SendFragment extends Fragment implements iSend{
     private iUpdataLadingPresenter updataLading;
     private adminGUID mGuid;
     private ExpressInfoManager mExpressInfoManager;
+    Button updataLading_btn;
+    Button callReceiver_btn;
 
     private Handler handler=new Handler()
     {
@@ -48,11 +52,18 @@ public class SendFragment extends Fragment implements iSend{
         // Inflate the layout for this fragment
         View thisView=inflater.inflate(R.layout.send_fragment_layout,container,false);
         updataLading=new UpdataLadingPresenterImpl(this);
-        Button button=(Button) thisView.findViewById(R.id.updataLading_btn);
-        button.setOnClickListener(new View.OnClickListener() {
+        updataLading_btn=(Button) thisView.findViewById(R.id.updataLading_btn);
+        updataLading_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updataLading.judgeUpLading(handler);
+            }
+        });
+        callReceiver_btn=(Button) thisView.findViewById(R.id.send_fragment_layout_callReceiver_btn);
+        callReceiver_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callReceiver("18362919691");
             }
         });
         return thisView;
@@ -66,5 +77,12 @@ public class SendFragment extends Fragment implements iSend{
     @Override
     public String getIdNum() {
         return mExpressInfoManager.getExpressInfoList().get(0).getIdNum();
+    }
+
+    private void callReceiver(String telephone)
+    {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:"+telephone));
+        startActivity(intent);
     }
 }
