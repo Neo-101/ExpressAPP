@@ -18,7 +18,6 @@ import android.widget.Button;
 import example.com.expressapp.R;
 import example.com.expressapp.adminGUID;
 import example.com.expressapp.login.view.LoginActivity;
-import example.com.expressapp.setting.presenter.iLogoutPresenter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,23 +26,22 @@ public class SettingFragment extends PreferenceFragment implements iSetting{
     private Button logoutButton;
     private CheckBoxPreference switchCompatPref;
     private Preference personInfoPref;
-
     private adminGUID mGuid;
-    private iLogoutPresenter iLogout;
-    private Handler handler=new Handler(){
-        public void handleMessage(android.os.Message msg) {
-            if(msg.what==1)
-            {
-                if(msg.obj.toString().equals("1")||msg.obj.toString().equals("2"))
-                {
-                    Intent intent=new Intent(SettingFragment.this.getActivity(), LoginActivity.class);
-                    startActivity(intent);
-                }
-                else
-                    android.util.Log.d("test","Fail "+msg.obj.toString());
-            }
-        };
-    };
+
+//    private Handler handler=new Handler(){
+//        public void handleMessage(android.os.Message msg) {
+//            if(msg.what==1)
+//            {
+//                if(msg.obj.toString().equals("1")||msg.obj.toString().equals("2"))
+//                {
+//                    Intent intent=new Intent(SettingFragment.this.getActivity(), LoginActivity.class);
+//                    startActivity(intent);
+//                }
+//                else
+//                    android.util.Log.d("test","Fail "+msg.obj.toString());
+//            }
+//        };
+//    };
 
     public SettingFragment(adminGUID guid) {
         // Required empty public constructor
@@ -93,8 +91,8 @@ public class SettingFragment extends PreferenceFragment implements iSetting{
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.animator.fragment_slide_right_enter,R.animator.fragment_slide_left_exit);
-                fragmentTransaction.replace(R.id.basispage_layout_content,new PersonInfoFragment()).commit();
+                fragmentTransaction.setCustomAnimations(R.animator.fragment_slide_left_enter,R.animator.fragment_slide_right_exit);
+                fragmentTransaction.replace(R.id.basispage_layout_content,new PersonInfoFragment(mGuid)).commit();
                 Log.d("Test","click");
                 return true;
             }

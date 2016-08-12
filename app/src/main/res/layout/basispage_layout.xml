@@ -12,10 +12,6 @@
         android:layout_height="wrap_content">
         <include
             layout="@layout/toolbar" />
-        <com.miguelcatalan.materialsearchview.MaterialSearchView
-            android:id="@+id/basispage_layout_searchview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
     </FrameLayout>
 
     <android.support.v4.widget.DrawerLayout

@@ -22,12 +22,12 @@ import example.com.expressapp.adminGUID;
 /**
  * Created by lxs on 2016/5/17.
  */
-public class LogoutPostBack implements iLogoutPostBack{
+public class PostBack implements iPostBack {
     @Override
-    public String logout(String adminGuid) throws Exception
+    public String postBackInfo(String adminGuid, String method) throws Exception
     {
         String result;
-        HttpPost httpRequest=new HttpPost("http://"+ adminGUID.ipAddress+":8080/Express/AndroidLogoutMethod");
+        HttpPost httpRequest=new HttpPost("http://"+ adminGUID.ipAddress+":8080/Express/"+method);
         //创建参数
         List<NameValuePair> params=new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("adminGUID", adminGuid));
@@ -67,4 +67,5 @@ public class LogoutPostBack implements iLogoutPostBack{
         //return "Connected error!\nPlease check the network connections";
         //return "Username or password is not correct.\nPlease try again.";
     }
+
 }

@@ -14,8 +14,6 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
-
 import example.com.expressapp.ActivityList;
 import example.com.expressapp.R;
 import example.com.expressapp.adminGUID;
@@ -23,20 +21,20 @@ import example.com.expressapp.history.view.HistoryFragment;
 import example.com.expressapp.searchinformation.model.ExpressInfoManager;
 import example.com.expressapp.searchinformation.view.InformationFragment;
 import example.com.expressapp.send.view.SendFragment;
-import example.com.expressapp.setting.presenter.LogoutPresenterImpl;
-import example.com.expressapp.setting.presenter.iLogoutPresenter;
+import example.com.expressapp.setting.presenter.PresenterImpl;
+import example.com.expressapp.setting.presenter.iPresenter;
 import example.com.expressapp.setting.view.SettingFragment;
 
 public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
 
     private adminGUID guid;
-    private iLogoutPresenter iLogout;
+    private iPresenter iLogout;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
     private double exitTime;
-    private MaterialSearchView materialSearchView;
+    //private MaterialSearchView materialSearchView;
     private ExpressInfoManager mExpressInfoManager=new ExpressInfoManager();
     private Handler handler=new Handler()
     {
@@ -56,7 +54,7 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
         ActivityList.addActivity(BasisPageActivity.this);
         initViews();
         guid=(adminGUID)getApplication();
-        iLogout=new LogoutPresenterImpl(this);
+        iLogout=new PresenterImpl(this);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -93,7 +91,7 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_toolbar,menu);
-        materialSearchView.setMenuItem(menu.findItem(R.id.menu_toolbar_search));
+        //materialSearchView.setMenuItem(menu.findItem(R.id.menu_toolbar_search));
         return true;
     }
     @Override
@@ -112,7 +110,7 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
             exitTime=System.currentTimeMillis();
         }
         else {
-            iLogout.LogoutJudge(handler);
+            iLogout.logoutJudge(handler);
             ActivityList.exitAllActivity();
         }
     }
@@ -124,7 +122,7 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
         toolbar=(Toolbar)findViewById(R.id.Toolbar);
         drawerLayout=(DrawerLayout)findViewById(R.id.basispage_layout_drawerlayout);
         navigationView=(NavigationView)findViewById(R.id.basispage_layout_drawer);
-        materialSearchView=(MaterialSearchView)findViewById(R.id.basispage_layout_searchview) ;
+        //materialSearchView=(MaterialSearchView)findViewById(R.id.basispage_layout_searchview) ;
         initToolbar();
         actionBarDrawerToggle=new ActionBarDrawerToggle(BasisPageActivity.this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
         actionBarDrawerToggle.syncState();

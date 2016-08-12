@@ -77,7 +77,8 @@ public class HistoryFragment extends Fragment implements iHistory{
     {
         for(int i=0;i<7;i++)
         {
-            numCountBarChart.addBar(new BarModel(countinfo.getDailyCount(i).getDateTime(),countinfo.getDailyCount(i).getDailyNum(),0xFF0097A7));
+            numCountBarChart.addBar(new BarModel(countinfo.getDailyCount(i).getDateTime(),
+                    countinfo.getDailyCount(i).getDailyNum(),Color.parseColor("#0097A7")));
         }
         numCountBarChart.startAnimation();
     }
@@ -86,7 +87,8 @@ public class HistoryFragment extends Fragment implements iHistory{
     {
         for(int i=0;i<7;i++)
         {
-            weightCountBarChart.addBar(new BarModel(countinfo.getDailyCount(i).getDateTime(),countinfo.getDailyCount(i).getDailyWeight()/1f,0xFF0097A7));
+            weightCountBarChart.addBar(new BarModel(countinfo.getDailyCount(i).getDateTime(),
+                    countinfo.getDailyCount(i).getDailyWeight()/1f,Color.parseColor("#0097A7")));
         }
         weightCountBarChart.startAnimation();
     }
@@ -99,8 +101,8 @@ public class HistoryFragment extends Fragment implements iHistory{
             delivered+=countinfo.getDailyCount(i).getDailyDelivered();
             undelivered+=countinfo.getDailyCount(i).getDailyUndelivered();
         }
-        DeliverInfoPieChart.addPieSlice(new PieModel("已送达", delivered, Color.parseColor("#FE6DA8")));
-        DeliverInfoPieChart.addPieSlice(new PieModel("未送达", undelivered, Color.parseColor("#56B7F1")));
+        DeliverInfoPieChart.addPieSlice(new PieModel("已送达", delivered, Color.parseColor("#0097A7")));
+        DeliverInfoPieChart.addPieSlice(new PieModel("未送达", undelivered, Color.parseColor("#FF5722")));
 
         DeliverInfoPieChart.startAnimation();
     }
