@@ -25,4 +25,15 @@ public class CountInfo {
     {
         return weeklyCount[i];
     }
+
+    public int getMaxDailyNum()
+    {
+        int maxDailyNum=0;
+        for(int i=0;i<7;i++)
+        {
+            if(maxDailyNum<weeklyCount[i].getDailyNum())
+                maxDailyNum=weeklyCount[i].getDailyNum();
+        }
+        return maxDailyNum;
+    }
 }

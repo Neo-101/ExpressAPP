@@ -37,27 +37,58 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:background="#99dddddd"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="5dp"
-                android:text="每日快递送达数量"
-                android:textColor="#666666"
-                android:textSize="19sp"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="每日快递送达数量"
+                    android:textColor="#666666"
+                    android:textSize="19sp"/>
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="200dp"
+                    android:background="@color/colorPrimaryDark"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="220dp"
+                    android:text="送达货物"/>
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="200dp"
+                    android:background="@color/colorAccent"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="220dp"
+                    android:text="未送达货物"/>
+            </FrameLayout>
+
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <org.eazegraph.lib.charts.BarChart
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/history_fragment_layout_numCount_barChart"
-                    android:layout_width="match_parent"
-                    android:layout_height="256dp"
-                    android:padding="10dp"
-                    app:egFixedBarWidth="true"
-                    app:egBarWidth="20dp"
-                    app:egLegendHeight="40dp" />
+            <org.eazegraph.lib.charts.StackedBarChart
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/history_fragment_layout_numCount_StackedChart"
+                android:layout_width="match_parent"
+                android:layout_height="256dp"
+                android:padding="10dp"
+                app:egBarTextSize="10sp"
+                app:egShowDecimal="false"
+                app:egFixedBarWidth="true"
+                app:egBarWidth="25dp"
+                app:egLegendHeight="40dp"/>
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -66,6 +97,7 @@
                     android:layout_marginRight="21dp"
                     android:background="#888888"/>
             </FrameLayout>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -91,7 +123,8 @@
                     android:layout_height="256dp"
                     android:padding="10dp"
                     app:egFixedBarWidth="true"
-                    app:egBarWidth="20dp"
+                    app:egShowDecimal="true"
+                    app:egBarWidth="25dp"
                     app:egLegendHeight="40dp"/>
                 <ImageView
                     android:layout_width="match_parent"
