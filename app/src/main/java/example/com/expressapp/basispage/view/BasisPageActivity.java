@@ -34,7 +34,6 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
     private double exitTime;
-    //private MaterialSearchView materialSearchView;
     private ExpressInfoManager mExpressInfoManager=new ExpressInfoManager();
     private Handler handler=new Handler()
     {
@@ -91,7 +90,6 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_toolbar,menu);
-        //materialSearchView.setMenuItem(menu.findItem(R.id.menu_toolbar_search));
         return true;
     }
     @Override
@@ -122,7 +120,6 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
         toolbar=(Toolbar)findViewById(R.id.Toolbar);
         drawerLayout=(DrawerLayout)findViewById(R.id.basispage_layout_drawerlayout);
         navigationView=(NavigationView)findViewById(R.id.basispage_layout_drawer);
-        //materialSearchView=(MaterialSearchView)findViewById(R.id.basispage_layout_searchview) ;
         initToolbar();
         actionBarDrawerToggle=new ActionBarDrawerToggle(BasisPageActivity.this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
         actionBarDrawerToggle.syncState();

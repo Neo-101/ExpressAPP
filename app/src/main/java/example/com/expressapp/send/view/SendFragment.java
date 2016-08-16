@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -68,6 +69,7 @@ public class SendFragment extends Fragment implements iSend{
         });
         return thisView;
     }
+
 
     @Override
     public String getGUID() {

@@ -39,18 +39,7 @@ public class getLadingInfoBack implements iGetLadingBack{
             HttpResponse httpResponse=(new DefaultHttpClient()).execute(httpRequest);
             //获取响应服务器的数据
             if (httpResponse.getStatusLine().getStatusCode()==200) {
-                //利用字节数组流和包装的绑定数据
-                byte[] data =new byte[128];
-                //先把从服务端来的数据转化成字节数组
-                data= EntityUtils.toByteArray((HttpEntity)httpResponse.getEntity());
-                //再创建字节数组输入流对象
-                ByteArrayInputStream bais = new ByteArrayInputStream(data);
-                //绑定字节流和数据包装流
-                DataInputStream dis = new DataInputStream(bais);
-                //将字节数组中的数据还原成原来的各种数据类型，代码如下：
-                result=new String(dis.readUTF());
-                dis.close();
-                bais.close();
+                result = EntityUtils.toString(httpResponse.getEntity(),"UTF-8");
                 return result;
             }
             else
