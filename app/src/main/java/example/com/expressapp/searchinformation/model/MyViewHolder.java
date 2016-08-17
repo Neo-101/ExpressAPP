@@ -84,7 +84,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
     public void setItemDrag()
     {
-        mCardView.setCardElevation(35.0f);
+        mCardView.setCardElevation(55.0f);
     }
 
     public void setItemUnDrag()

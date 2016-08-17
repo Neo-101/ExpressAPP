@@ -4,14 +4,17 @@ package example.com.expressapp.send.view;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +22,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -26,13 +30,9 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,15 +66,36 @@ import com.esri.core.tasks.na.RouteResult;
 import com.esri.core.tasks.na.RouteTask;
 import com.esri.core.tasks.na.StopGraphic;
 
+import example.com.expressapp.ActivityList;
+import example.com.expressapp.adminGUID;
+import example.com.expressapp.basispage.view.BasisPageActivity;
+import example.com.expressapp.basispage.view.iBasisPage;
+import example.com.expressapp.searchinformation.model.ExpressInfo;
+import example.com.expressapp.searchinformation.model.ExpressInfoManager;
 import example.com.expressapp.send.model.ExpressDistance;
 import example.com.expressapp.send.model.AntColonyAlgorithm;
 import example.com.expressapp.R;
 import example.com.expressapp.send.model.MyAdapter;
+import example.com.expressapp.send.presenter.UpdataLadingPresenterImpl;
+import example.com.expressapp.setting.presenter.PresenterImpl;
+import example.com.expressapp.setting.presenter.iPresenter;
 
 
 public class SendActivity extends AppCompatActivity implements
-        RoutingListFragment.onDrawerListSelectedListener,SearchView.OnQueryTextListener{
+        RoutingListFragment.onDrawerListSelectedListener,SearchView.OnQueryTextListener,iSend,iBasisPage {
 
+    private adminGUID mGuid;
+    private double exitTime;
+    private iPresenter iLogout;
+    private Handler handler=new Handler()
+    {
+        public void handleMessage(android.os.Message msg)
+        {
+            if(msg.what==1)
+            {
+            }
+        }
+    };
 
     MapView mMapView;
     GraphicsLayer mLocationLayer;
@@ -82,6 +103,10 @@ public class SendActivity extends AppCompatActivity implements
     Point mSearchResultLayerPoint;
     GraphicsLayer routeLayer, hiddenSegmentsLayer;
 
+    private ExpressInfo currentExpressInfo;
+
+    AlertDialog.Builder doneDialogBuilder;
+    FloatingActionButton sendDoneFab;
     ProgressDialog dialog;
     AppCompatButton nextButton;
     AppCompatButton belowButton;
@@ -90,6 +115,7 @@ public class SendActivity extends AppCompatActivity implements
     CardView getDirectionCardView;
     public static DrawerLayout mDrawerLayout;
     private Toolbar toolbar;
+    ExpressInfoManager mExpressInfoManager;
 
     List<Point> mLocationLayerPoint = new ArrayList<>();
     String mLocationLayerPointString;
@@ -171,10 +197,16 @@ public class SendActivity extends AppCompatActivity implements
     };
 
     public void addressInit(){
-        addressList.add("6128 Wilcrest Dr.");
+
+        for(ExpressInfo info:mExpressInfoManager.getExpressInfoList())
+        {
+            addressList.add(info.getReceiverAddress());
+        }
+
+        /*addressList.add("6128 Wilcrest Dr.");
         addressList.add("9600 Bellaire Blvd. Suite 101");
-        //addressList.add("9600 Bellaire Blvd. Suite 252");
-/*        addressList.add("4800 Calhoun Road, Houston, Texas 77004");
+        addressList.add("9600 Bellaire Blvd. Suite 252");
+        addressList.add("4800 Calhoun Road, Houston, Texas 77004");
         addressList.add("Louisiana St, Houston, Texas");
         addressList.add("Franklin St, Houston, Texas");
         addressList.add("Silver St, Houston, Texas");
@@ -226,6 +258,37 @@ public class SendActivity extends AppCompatActivity implements
         // Execute async task to find the addressList
         new PlaceSearchAsyncTask().execute(findParams);
         mLocationLayerPointString = address;
+    }
+
+    //当返回键被按下时调用
+    @Override
+    public void onBackPressed()
+    {
+        exitAPP();
+    }
+
+    //退出APP
+    private void exitAPP()
+    {
+        if(System.currentTimeMillis()-exitTime>2000)
+        {
+            Toast.makeText(SendActivity.this,"再按一次退出",Toast.LENGTH_SHORT).show();
+            exitTime=System.currentTimeMillis();
+        }
+        else {
+            iLogout.logoutJudge(handler);
+            ActivityList.exitAllActivity();
+        }
+    }
+
+    @Override
+    public String getGUID() {
+        return mGuid.getGUID();
+    }
+
+    @Override
+    public String getIdNum() {
+        return currentExpressInfo.getIdNum();
     }
 
     private class PlaceSearchAsyncTask extends AsyncTask<LocatorFindParameters, Void, List<LocatorGeocodeResult>> {
@@ -655,6 +718,22 @@ public class SendActivity extends AppCompatActivity implements
         }
     }
 
+    private void callReceiver(String telephone)
+    {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:"+telephone));
+        try{
+            startActivity(intent);
+        }catch (Exception e)
+        {
+        }
+    }
+
+    private void setLadingInfo()
+    {
+        new UpdataLadingPresenterImpl(this).judgeUpLading(handler);
+    }
+
     /**
      * Zoom to location using a specific size of extent.
      *
@@ -859,10 +938,6 @@ public class SendActivity extends AppCompatActivity implements
                             mDrawerLayout.openDrawer(GravityCompat.END);//原来是Gravity.END
                         }
                         break;
-                    case R.id.action_load:
-                        executeLocatorTask(addressList);
-                        mIsAddressLoaded = true;
-                        break;
                 }
                 return true;
             }
@@ -873,7 +948,13 @@ public class SendActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityList.addActivity(SendActivity.this);
         setContentView(R.layout.send_activity_layout);
+        mGuid=(adminGUID)getApplication();
+        iLogout=new PresenterImpl(this);
+        Intent intent=getIntent();
+        mExpressInfoManager=(ExpressInfoManager)intent.getSerializableExtra("ExpressData") ;
+
         addressInit();
         singleAddressNumInit();
         singleRouteInit();
@@ -924,8 +1005,39 @@ public class SendActivity extends AppCompatActivity implements
         nextButton=(AppCompatButton)findViewById(R.id.send_activity_layout_nextbutton);
         belowButton=(AppCompatButton)findViewById(R.id.send_activity_layout_bellowbutton);
         directionsLabel = (TextView) findViewById(R.id.send_activity_layout_directionsLabel);
+        sendDoneFab=(FloatingActionButton)findViewById(R.id.send_activity_layout_send_done);
+
+        doneDialogBuilder=new AlertDialog.Builder(this);
+        doneDialogBuilder.setTitle("货物已送达");
+        doneDialogBuilder.setNegativeButton("拨打电话", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(currentExpressInfo.getReceiverPhone().equals("")) callReceiver("18362919691");
+                else callReceiver(currentExpressInfo.getReceiverPhone());
+            }
+        });
+        doneDialogBuilder.setPositiveButton("确认送达", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setLadingInfo();
+            }
+        });
         toolbar=(Toolbar)findViewById(R.id.Toolbar);
         initToolbar();
+
+        sendDoneFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(RoutingListFragment.mDrawerList!=null&&!directionsLabel.getText().toString().contains("minutes")){
+                    currentExpressInfo=mExpressInfoManager.getExpressInfoByAddress(directionsLabel.getText().toString());
+                    doneDialogBuilder.setMessage("拨打收货人电话: "+currentExpressInfo.getReceiverPhone());
+                    doneDialogBuilder.show();
+                }
+                else{
+                    Snackbar.make(sendDoneFab.getRootView(),"还未到达收货人地址",Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         belowButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1018,17 +1130,6 @@ public class SendActivity extends AppCompatActivity implements
             }
         });
 
-
-        // Get the location display manager and start reading location. Don't
-        // auto-pan
-        // to center our position
-        /*
-        ldm = map.getLocationDisplayManager();
-        ldm.setLocationListener(new MyLocationListener());
-        ldm.start();
-        ldm.setAutoPanMode(LocationDisplayManager.AutoPanMode.OFF);
-        */
-
         /**
          * On single tapping the map,
          * 1 query fot a addressList point and show addressList
@@ -1096,6 +1197,8 @@ public class SendActivity extends AppCompatActivity implements
                 mMapView.setExtent(selected.getGeometry(), 50);
             }
         });
+
+
     }
 
     @Override
@@ -1105,7 +1208,6 @@ public class SendActivity extends AppCompatActivity implements
         MenuItem menuItem=menu.findItem(R.id.action_search);
 
         SearchView searchView=(SearchView) MenuItemCompat.getActionView(menuItem);
-        searchView.setQueryHint("地址");
         searchView.setOnQueryTextListener(this);
 
         MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
@@ -1119,6 +1221,12 @@ public class SendActivity extends AppCompatActivity implements
                 return true;
             }
         });
+        ProgressDialog dialogData = ProgressDialog.show(SendActivity.this, "数据",
+                "数据载入中...", true);
+        dialogData.show();
+        executeLocatorTask(addressList);
+        mIsAddressLoaded = true;
+        dialogData.dismiss();
         return true;
     }
 
@@ -1126,6 +1234,8 @@ public class SendActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Snackbar.make(getDirectionCardView.getRootView(),"返回",Snackbar.LENGTH_LONG).show();
+            Intent intent=new Intent(SendActivity.this, BasisPageActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

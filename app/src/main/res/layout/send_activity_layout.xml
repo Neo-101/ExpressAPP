@@ -31,8 +31,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="7"
-                    android:layout_marginBottom="-8dp">
+                    android:layout_weight="7">
                     <com.esri.android.map.MapView
                         android:id="@+id/send_activity_layout_mapview"
                         android:layout_width="match_parent"
@@ -41,36 +40,49 @@
                         mapoptions.center="32.05000, 118.78333"
                         mapoptions.ZoomLevel="16">
                     </com.esri.android.map.MapView>
-                    <android.support.v7.widget.CardView
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="bottom|left"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginBottom="15dp"
-                        android:id="@+id/send_activity_layout_gps"
-                        app:cardElevation="4dp">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_send_gps"
-                            app:backgroundTint="@color/textColorPrimary"/>
-                    </android.support.v7.widget.CardView>
-                    <android.support.v7.widget.CardView
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_gravity="bottom|right"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="15dp"
-                        android:id="@+id/send_activity_layout_calculateroute"
-                        app:cardElevation="4dp">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_send_calculateroute"
-                            app:backgroundTint="@color/textColorPrimary"
-                            android:scaleX="1.2"
-                            android:scaleY="1.2"/>
-                    </android.support.v7.widget.CardView>
+                        android:layout_marginBottom="20dp"
+                        android:orientation="vertical">
+                        <android.support.v7.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_marginBottom="12dp"
+                            android:id="@+id/send_activity_layout_gps"
+                            app:cardElevation="4dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_send_gps"
+                                app:backgroundTint="@color/textColorPrimary"
+                                android:scaleX="1.2"
+                                android:scaleY="1.2"/>
+                        </android.support.v7.widget.CardView>
+                        <android.support.v7.widget.CardView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:id="@+id/send_activity_layout_calculateroute"
+                            app:cardElevation="4dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_send_calculateroute"
+                                app:backgroundTint="@color/textColorPrimary"
+                                android:scaleX="1.5"
+                                android:scaleY="1.5"/>
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+                    <android.support.design.widget.FloatingActionButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginBottom="22dp"
+                        android:layout_marginRight="3dp"
+                        android:id="@+id/send_activity_layout_send_done"
+                        android:src="@drawable/ic_send_done"/>
                 </FrameLayout>
 
 
@@ -101,7 +113,6 @@
                         android:paddingTop="8dp"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:text="12123123"
                         android:textColor="#545454"
                         android:textSize="14sp" />
                     <android.support.v7.widget.AppCompatButton
@@ -134,7 +145,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="            语音"
+                    android:text="                            语音"
                     android:textSize="15sp"
                     android:textColor="@color/colorControlNormal"/>
 

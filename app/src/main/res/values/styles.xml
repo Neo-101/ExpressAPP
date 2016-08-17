@@ -10,6 +10,7 @@
         <item name="android:textColorHint">@color/colorControlNormal</item>
         <item name="drawerArrowStyle">@style/MyMaterialTheme.drawerArrowStyle</item>
     </style>
+
     <style name="MyMaterialTheme.drawerArrowStyle" parent="Base.Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/windowBackground</item>
     </style>

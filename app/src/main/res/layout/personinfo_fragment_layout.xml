@@ -28,14 +28,14 @@
                 app:elevation="5dp"
                 app:pressedTranslationZ="10dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginBottom="120dp"
+                android:layout_marginBottom="170dp"
                 android:layout_alignBottom="@+id/personinfo_fragment_cardview"
                 android:layout_alignRight="@+id/personinfo_fragment_cardview" />
             <android.support.v7.widget.CardView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/personinfo_fragment_cardview"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="172dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
@@ -112,9 +112,10 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
-                android:layout_marginTop="340dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:layout_below="@id/personinfo_fragment_cardview"
                 app:cardBackgroundColor="@color/windowBackground"
                 app:cardElevation="2dp"
                 app:cardCornerRadius="8dp">

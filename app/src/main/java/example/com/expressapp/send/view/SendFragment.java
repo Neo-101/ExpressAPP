@@ -15,10 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import java.util.Date;
 
@@ -28,7 +26,6 @@ import example.com.expressapp.searchinformation.model.ExpressInfo;
 import example.com.expressapp.searchinformation.model.ExpressInfoManager;
 import example.com.expressapp.searchinformation.model.MyViewHolder;
 import example.com.expressapp.searchinformation.model.RecyclerViewAdapter;
-import example.com.expressapp.send.model.MyAdapter;
 import example.com.expressapp.send.presenter.UpdataLadingPresenterImpl;
 import example.com.expressapp.send.presenter.iUpdataLadingPresenter;
 
@@ -60,21 +57,8 @@ public class SendFragment extends Fragment implements iSend{
     public SendFragment(ExpressInfoManager expressInfoManager,adminGUID guid) {
         // Required empty public constructor
         this.mExpressInfoManager=expressInfoManager;
+        mExpressInfoManager.removeSendedData();
         this.mGuid=guid;
-
-        Date date4=new Date(116,10,20);
-        Date date1=new Date(116,7,7);
-        Date date2=new Date(116,5,6);
-        Date date3=new Date(116,6,2);
-        mExpressInfoManager.addExpressInfo(new ExpressInfo("耳机",0.2f,"中","肖一嘉","18351925810", "江苏省南京" +
-                "市仙林大道135号","肖一嘉","18351925810","江苏省南京市仙林大道135号","2016080803",date1,true));
-        mExpressInfoManager.addExpressInfo(new ExpressInfo("小耳机",0.1f,"小","廖祥森","13338513960","江苏省南京" +
-                "市学则路456号","廖祥森","13338513960","江苏省南京市学则路456号","2016080805",date2,false));
-        mExpressInfoManager.addExpressInfo(new ExpressInfo("大耳机",0.3f,"大","彭锋","13545603130","江苏省南京" +
-                "市三山路12号","彭锋","13545603130","江苏省南京市三山路12号","2016080801",date3,true));
-        mExpressInfoManager.addExpressInfo(new ExpressInfo("超大耳机",0.4f,"超大","卢竞择","16456123112","江苏省" +
-                "南京市软件大道35号","卢竞择","16456123112","江苏省南京市软件大道35号","2016080802",date4,false));
-
     }
 
 
@@ -88,7 +72,11 @@ public class SendFragment extends Fragment implements iSend{
         startSendFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(thisView,"1231434",Snackbar.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(),SendActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ExpressData", mExpressInfoManager);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

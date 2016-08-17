@@ -3,6 +3,7 @@ package example.com.expressapp.basispage.view;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -79,6 +80,7 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
                 return false;
             }
         });
+        getSupportFragmentManager().beginTransaction().replace(R.id.basispage_layout_content,new InformationFragment(mExpressInfoManager,guid)).commit();
     }
     @Override
     protected void onDestroy()
@@ -131,7 +133,7 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Toolbar.OnMenuItemClickListener onMenuItemClickListener=new Toolbar.OnMenuItemClickListener()
+        /*Toolbar.OnMenuItemClickListener onMenuItemClickListener=new Toolbar.OnMenuItemClickListener()
         {
             @Override
             public boolean onMenuItemClick(MenuItem item)
@@ -144,7 +146,7 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
                 return  true;
             }
         };
-        toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+        toolbar.setOnMenuItemClickListener(onMenuItemClickListener);*/
     }
 
     @Override

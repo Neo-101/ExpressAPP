@@ -1,5 +1,6 @@
 package example.com.expressapp.searchinformation.model;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.Date;
 /**
  * Created by xyj64 on 2016/8/7.
  */
-public class ExpressInfo {
+public class ExpressInfo implements Serializable{
     private String ladingName;//货物名称
     private float ladingWeight;//货物重量
     private String ladingSpecifications;//货物尺寸

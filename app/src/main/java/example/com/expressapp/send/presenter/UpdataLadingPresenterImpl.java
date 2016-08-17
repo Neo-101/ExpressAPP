@@ -22,8 +22,6 @@ public class UpdataLadingPresenterImpl implements iUpdataLadingPresenter {
             public void run() {
                 String upLadingResult=new String();
                 try {
-                    Log.d("test2",iView.getIdNum());
-                    Log.d("test2",iView.getGUID());
                     upLadingResult=iPostBack.updataLading(iView.getGUID(),iView.getIdNum());
                 }
                 catch (Exception e)

@@ -1,7 +1,7 @@
 package example.com.expressapp.searchinformation.model;
 
+
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -255,6 +255,24 @@ public class ExpressInfoManager implements Serializable{
             ExpressInfo temp=expressInfoList.get(i);
             expressInfoList.remove(i);
             expressInfoList.add(j,temp);
+        }
+    }
+
+    public ExpressInfo getExpressInfoByAddress(String Address)
+    {
+        for(ExpressInfo info:expressInfoList)
+        {
+            if(info.getReceiverAddress().equals(Address))
+                return info;
+        }
+        return null;
+    }
+
+    public void removeSendedData()
+    {
+        for(ExpressInfo info:expressInfoList){
+            if(info.getIsDelivered())
+                expressInfoList.remove(info);
         }
     }
 

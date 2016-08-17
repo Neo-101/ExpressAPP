@@ -246,20 +246,8 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
     @Override
     public  void onLoginRight()
     {
-        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP)
-        {
-            // 包含新API的代码块
-            getWindow().setExitTransition(new Explode());
-            Intent intent=new Intent(LoginActivity.this,BasisPageActivity.class);
-            startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-        }
-        else
-        {
-            // 包含旧的API的代码块
-            Intent intent=new Intent(LoginActivity.this,BasisPageActivity.class);
-            startActivity(intent);
-        }
-
+        Intent intent=new Intent(LoginActivity.this,BasisPageActivity.class);
+        startActivity(intent);
     }
 
     //加载图标
