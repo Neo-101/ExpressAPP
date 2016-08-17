@@ -128,7 +128,7 @@ public class BasisPageActivity extends AppCompatActivity implements iBasisPage{
     }
     private void initToolbar()
     {
-        toolbar.setTitle("BasisPage");
+        toolbar.setTitle("主界面");
         toolbar.setTitleTextColor(getResources().getColor(R.color.windowBackground));
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);

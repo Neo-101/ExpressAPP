@@ -150,15 +150,15 @@ public class LoginActivity extends AppCompatActivity implements i_LoginView
             {
                 if(SwitchCompat_rememberpassword.isChecked())
                 {
-                    sharedPreferences.edit().putBoolean("REMEMBER_PASSWORD",true).commit();
-                    sharedPreferences.edit().putString("USERNAME",EditText_username.getEditText().getText().toString()).commit();
-                    sharedPreferences.edit().putString("PASSWORD",EditText_password.getEditText().getText().toString()).commit();
+                    sharedPreferences.edit().putBoolean("REMEMBER_PASSWORD",true).apply();
+                    sharedPreferences.edit().putString("USERNAME",EditText_username.getEditText().getText().toString()).apply();
+                    sharedPreferences.edit().putString("PASSWORD",EditText_password.getEditText().getText().toString()).apply();
                 }
                 else
                 {
-                    sharedPreferences.edit().putBoolean("REMEMBER_PASSWORD",false).commit();
-                    sharedPreferences.edit().remove("USERNAME").commit();
-                    sharedPreferences.edit().remove("PASSWORD").commit();
+                    sharedPreferences.edit().putBoolean("REMEMBER_PASSWORD",false).apply();
+                    sharedPreferences.edit().remove("USERNAME").apply();
+                    sharedPreferences.edit().remove("PASSWORD").apply();
                 }
 
             }

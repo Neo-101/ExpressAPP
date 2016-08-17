@@ -57,9 +57,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_send_gps"
-                                app:backgroundTint="@color/textColorPrimary"
-                                android:scaleX="1.2"
-                                android:scaleY="1.2"/>
+                                app:backgroundTint="@color/colorPrimary" />
                         </android.support.v7.widget.CardView>
                         <android.support.v7.widget.CardView
                             android:layout_width="45dp"
@@ -70,9 +68,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:src="@drawable/ic_send_calculateroute"
-                                app:backgroundTint="@color/textColorPrimary"
-                                android:scaleX="1.5"
-                                android:scaleY="1.5"/>
+                                app:backgroundTint="@color/colorPrimary"
+                                android:scaleX="1.1"
+                                android:scaleY="1.1"/>
                         </android.support.v7.widget.CardView>
                     </LinearLayout>
                     <android.support.design.widget.FloatingActionButton
@@ -91,18 +89,20 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:elevation="4dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="#fafafa">
                     <android.support.v7.widget.AppCompatButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="8dp"
+                        android:layout_marginBottom="4dp"
                         android:layout_weight="1"
                         android:paddingLeft="3dp"
                         android:paddingRight="3dp"
                         android:id="@+id/send_activity_layout_bellowbutton"
-                        android:elevation="4dp"
                         android:text="上一段"
-                        app:backgroundTint="@color/windowBackground"
+                        app:backgroundTint="#fafafa"
+                        app:elevation="0dp"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                     <TextView
@@ -119,13 +119,15 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="8dp"
+                        android:layout_marginBottom="4dp"
                         android:paddingLeft="3dp"
                         android:paddingRight="3dp"
                         android:layout_weight="1"
                         android:id="@+id/send_activity_layout_nextbutton"
-                        android:elevation="4dp"
                         android:text="下一段"
-                        app:backgroundTint="@color/windowBackground"
+                        app:elevation="0dp"
+                        android:maxHeight="0dp"
+                        app:backgroundTint="#fafafa"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -139,14 +141,14 @@
                 android:background="@android:color/white"
                 android:orientation="vertical"
                 android:elevation="4dp">
-
                 <android.support.v7.widget.SwitchCompat
                     android:id="@+id/send_activity_layout_switch"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
                     android:checked="true"
-                    android:text="                            语音"
-                    android:textSize="15sp"
+                    android:text="语音"
+                    android:textSize="17sp"
                     android:textColor="@color/colorControlNormal"/>
 
                 <ListView
