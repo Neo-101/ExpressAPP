@@ -98,11 +98,13 @@ public class RoutingListFragment extends Fragment implements
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		((MyAdapter)mDrawerList.getAdapter()).setSelectedItemID(position);
 		TextView segment = (TextView) view.findViewById(R.id.send_route_list_item_textview);
 		SendActivity.mDrawerLayout.closeDrawers();
 		if (isSoundOn)
 			speakOut(segment.getText().toString());
 		mCallback.onSegmentSelected(segment.getText().toString());
+		((MyAdapter)mDrawerList.getAdapter()).notifyDataSetChanged();
 	}
 
 	private void speakOut(String text) {

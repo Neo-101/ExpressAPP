@@ -2,6 +2,7 @@
 package example.com.expressapp.send.model;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +20,20 @@ import example.com.expressapp.R;
  */
 public class MyAdapter extends ArrayAdapter<String> {
 
-	Context context;
-	ArrayList<String> directions;
+	private int selectedItemID;
+	private Context context;
+	private ArrayList<String> directions;
 
 	public MyAdapter(Context c, ArrayList<String> currDirections) {
 		super(c, R.layout.send_route_list_item, R.id.send_route_list_item_textview, currDirections);
 		this.context = c;
-		directions = currDirections;
+		this.selectedItemID=0;
+		this.directions = currDirections;
+	}
+
+	public void setSelectedItemID(int id)
+	{
+		this.selectedItemID=id;
 	}
 
 	@Override
@@ -60,6 +68,8 @@ public class MyAdapter extends ArrayAdapter<String> {
 			myImage.setImageResource(R.drawable.ic_cardview_address);
 
 		}
+
+		if(position==this.selectedItemID) row.setBackgroundColor(Color.parseColor("#B2EBF2"));
 
 		TextView myTitle = (TextView) row.findViewById(R.id.send_route_list_item_textview);
 		myTitle.setText(segment);

@@ -68,6 +68,7 @@ import com.esri.core.tasks.na.StopGraphic;
 import example.com.expressapp.send.model.ExpressDistance;
 import example.com.expressapp.send.model.AntColonyAlgorithm;
 import example.com.expressapp.R;
+import example.com.expressapp.send.model.MyAdapter;
 
 
 public class SendActivity extends AppCompatActivity implements
@@ -934,7 +935,9 @@ public class SendActivity extends AppCompatActivity implements
                         String lv_segment = lv.getItemAtPosition(i).toString();
                         if (segment.equals(lv_segment))
                         {
+                            ((MyAdapter)lv.getAdapter()).setSelectedItemID(i);
                             lv.setSelection(i);
+                            ((MyAdapter)lv.getAdapter()).notifyDataSetChanged();
                         }
                     }
                 }
