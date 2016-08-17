@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlNormal">@color/colorControlNormal</item>
+        <item name="colorControlNormal">@color/windowBackground</item>
         <item name="android:textColorHint">@color/colorControlNormal</item>
         <item name="drawerArrowStyle">@style/MyMaterialTheme.drawerArrowStyle</item>
     </style>

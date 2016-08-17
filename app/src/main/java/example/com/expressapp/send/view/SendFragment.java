@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import android.widget.Button;
 import example.com.expressapp.R;
 import example.com.expressapp.adminGUID;
 import example.com.expressapp.searchinformation.model.ExpressInfoManager;
+import example.com.expressapp.searchinformation.model.RecyclerViewAdapter;
 import example.com.expressapp.send.presenter.UpdataLadingPresenterImpl;
 import example.com.expressapp.send.presenter.iUpdataLadingPresenter;
 
@@ -26,6 +29,9 @@ public class SendFragment extends Fragment implements iSend{
     private iUpdataLadingPresenter updataLading;
     private adminGUID mGuid;
     private ExpressInfoManager mExpressInfoManager;
+    private RecyclerViewAdapter mAdapter;
+    private RecyclerView mRecyclerView;
+    private ItemTouchHelper itemTouchHelper;
     Button updataLading_btn;
     Button callReceiver_btn;
 
@@ -35,6 +41,16 @@ public class SendFragment extends Fragment implements iSend{
         {
             if(msg.what==1)
             {
+                if(mExpressInfoManager.getInfoNum()==0)
+                {
+                    mExpressInfoManager.setExpressInfoList(msg.obj.toString());
+                    for(int i=0;i<mExpressInfoManager.getExpressInfoList().size();i++)
+                    {
+                        Log.d("test",mExpressInfoManager.getExpressInfoList().get(i).getReceiverName());
+                    }
+                    mExpressInfoManager.quickSortbyIdNum(0,mExpressInfoManager.getExpressInfoList().size()-1);
+                    mAdapter.updateData(mExpressInfoManager);
+                }
                 Log.d("test",msg.obj.toString());
             }
         }
