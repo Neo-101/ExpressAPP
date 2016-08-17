@@ -51,7 +51,6 @@ public class MyAdapter extends ArrayAdapter<String> {
 
 		} else if (segment.contains("right")) {
 			myImage.setImageResource(R.drawable.ic_route_list_right);
-
 		} else if (segment.contains("Continue") || segment.contains("straight")
 				|| segment.contains("Go") || segment.contains("ramp")) {
 			myImage.setImageResource(R.drawable.ic_route_list_straight);

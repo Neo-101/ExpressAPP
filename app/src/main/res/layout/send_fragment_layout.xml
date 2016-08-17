@@ -1,22 +1,23 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/windowBackground"
     tools:context="example.com.expressapp.send.view.SendFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/send_fragment_layout_recyclerview">
+    </android.support.v7.widget.RecyclerView>
 
-    <Button
-    android:id="@+id/updataLading_btn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="UpdataLading"/>
-
-    <Button
-        android:id="@+id/send_fragment_layout_callReceiver_btn"
+    <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CallReceiver"/>
+        android:id="@+id/send_fragment_layout_start_send"
+        android:src="@drawable/ic_start_send"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

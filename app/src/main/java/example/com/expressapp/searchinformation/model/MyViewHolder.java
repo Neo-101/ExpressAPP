@@ -19,6 +19,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     {
         super(itemView);
         mCardView=(CardView)itemView.findViewById(R.id.itemview_layout_cardview);
+        setItemUnDrag();
     }
 
     public void setIDInfo(String id)
@@ -79,5 +80,15 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     public void setItemUnselected()
     {
         mCardView.setCardBackgroundColor(Color.WHITE);
+    }
+
+    public void setItemDrag()
+    {
+        mCardView.setCardElevation(35.0f);
+    }
+
+    public void setItemUnDrag()
+    {
+        mCardView.setCardElevation(8.0f);
     }
 }

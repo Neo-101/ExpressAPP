@@ -14,7 +14,7 @@
         android:layout_marginBottom="10dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:id="@+id/itemview_layout_cardview"
-        app:cardElevation="4dp"
+        app:cardElevation="6dp"
         app:cardCornerRadius="8dp"
         app:cardBackgroundColor="#ffffff"
         app:contentPadding="8dp"

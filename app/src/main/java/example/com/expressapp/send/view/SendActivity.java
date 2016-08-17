@@ -21,6 +21,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -82,6 +83,8 @@ public class SendActivity extends AppCompatActivity implements
     GraphicsLayer routeLayer, hiddenSegmentsLayer;
 
     ProgressDialog dialog;
+    AppCompatButton nextButton;
+    AppCompatButton belowButton;
     TextView directionsLabel;
     CardView calculateCardView;
     CardView getDirectionCardView;
@@ -507,7 +510,7 @@ public class SendActivity extends AppCompatActivity implements
             SimpleLineSymbol routeSymbol = new SimpleLineSymbol(Color.BLUE, 3);
             PictureMarkerSymbol destinationSymbol = new PictureMarkerSymbol(
                     mMapView.getContext(), getResources().getDrawable(
-                    R.drawable.ic_cardview_address));
+                    R.drawable.ic_destination));
 
             /*
             //顺序记录路径长度
@@ -918,10 +921,57 @@ public class SendActivity extends AppCompatActivity implements
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         calculateCardView = (CardView) findViewById(R.id.send_activity_layout_calculateroute);
         getDirectionCardView = (CardView) findViewById(R.id.send_activity_layout_gps);
+        nextButton=(AppCompatButton)findViewById(R.id.send_activity_layout_nextbutton);
+        belowButton=(AppCompatButton)findViewById(R.id.send_activity_layout_bellowbutton);
         directionsLabel = (TextView) findViewById(R.id.send_activity_layout_directionsLabel);
         toolbar=(Toolbar)findViewById(R.id.Toolbar);
         initToolbar();
 
+        belowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String segment = directionsLabel.getText().toString();
+                ListView lv = RoutingListFragment.mDrawerList;
+                if(lv!=null){
+                    for (int i = 0; i < lv.getCount(); i++)
+                    {
+                        String lv_segment = lv.getItemAtPosition(i).toString();
+                        if (segment.equals(lv_segment))
+                        {
+                            if(i==0) i++;
+                            ((MyAdapter)lv.getAdapter()).setSelectedItemID(i-1);
+                            directionsLabel.setText(lv.getItemAtPosition(i-1).toString());
+                            onSegmentSelected(lv.getItemAtPosition(i-1).toString());
+                            lv.setSelection(i-1);
+                            ((MyAdapter)lv.getAdapter()).notifyDataSetChanged();
+                        }
+                    }
+                }
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String segment = directionsLabel.getText().toString();
+                ListView lv = RoutingListFragment.mDrawerList;
+                if(lv!=null){
+                    for (int i = 0; i < lv.getCount(); i++)
+                    {
+                        String lv_segment = lv.getItemAtPosition(i).toString();
+                        if (segment.equals(lv_segment))
+                        {
+                            if(i==lv.getCount()-1) i--;
+                            ((MyAdapter)lv.getAdapter()).setSelectedItemID(i+1);
+                            directionsLabel.setText(lv.getItemAtPosition(i+1).toString());
+                            onSegmentSelected(lv.getItemAtPosition(i+1).toString());
+                            lv.setSelection(i+1);
+                            ((MyAdapter)lv.getAdapter()).notifyDataSetChanged();
+                        }
+                    }
+                }
+            }
+        });
 
         directionsLabel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -930,7 +980,7 @@ public class SendActivity extends AppCompatActivity implements
                     mDrawerLayout.openDrawer(GravityCompat.END);//原来是Gravity.END
                     String segment = directionsLabel.getText().toString();
                     ListView lv = RoutingListFragment.mDrawerList;
-                    for (int i = 0; i < lv.getCount() - 1; i++)
+                    for (int i = 0; i < lv.getCount(); i++)
                     {
                         String lv_segment = lv.getItemAtPosition(i).toString();
                         if (segment.equals(lv_segment))

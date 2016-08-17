@@ -78,17 +78,45 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:elevation="4dp">
+                    android:elevation="4dp"
+                    android:orientation="horizontal">
+                    <android.support.v7.widget.AppCompatButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:id="@+id/send_activity_layout_bellowbutton"
+                        android:elevation="4dp"
+                        android:text="上一段"
+                        app:backgroundTint="@color/windowBackground"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
                     <TextView
                         android:id="@+id/send_activity_layout_directionsLabel"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+                        android:layout_weight="4"
+                        android:paddingTop="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="12123123"
                         android:textColor="#545454"
-                        android:textSize="15sp" />
+                        android:textSize="14sp" />
+                    <android.support.v7.widget.AppCompatButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:layout_weight="1"
+                        android:id="@+id/send_activity_layout_nextbutton"
+                        android:elevation="4dp"
+                        android:text="下一段"
+                        app:backgroundTint="@color/windowBackground"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -106,8 +134,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:elevation="2dp"
-                    android:text="语音"
+                    android:text="            语音"
+                    android:textSize="15sp"
                     android:textColor="@color/colorControlNormal"/>
 
                 <ListView
@@ -116,7 +144,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:choiceMode="singleChoice"
-                    android:divider="@color/colorPrimary"
+                    android:divider="#B2EBF2"
                     android:dividerHeight="1dp" />
             </LinearLayout>
 

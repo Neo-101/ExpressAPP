@@ -1,5 +1,7 @@
 package example.com.expressapp.searchinformation.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,7 +10,7 @@ import java.util.List;
  */
 
 //根据你的信息，在初始化的时候往list中加入货物货物
-public class ExpressInfoManager {
+public class ExpressInfoManager implements Serializable{
     private List<ExpressInfo> expressInfoList;
 
     public ExpressInfoManager()
@@ -240,6 +242,20 @@ public class ExpressInfoManager {
     {
         if(expressInfoList.contains(expressInfo))
             expressInfoList.remove(expressInfo);
+    }
+
+    public void swapNearExpressInfo(int i,int j)
+    {
+        if(i<j){
+            ExpressInfo temp=expressInfoList.get(j);
+            expressInfoList.remove(j);
+            expressInfoList.add(i,temp);
+        }
+        else {
+            ExpressInfo temp=expressInfoList.get(i);
+            expressInfoList.remove(i);
+            expressInfoList.add(j,temp);
+        }
     }
 
 }
