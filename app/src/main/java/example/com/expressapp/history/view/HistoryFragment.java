@@ -1,6 +1,7 @@
 package example.com.expressapp.history.view;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import example.com.expressapp.history.presenter.iHistoryPresenter;
 /**
  * A simple {@link Fragment} subclass.
  */
+@SuppressLint("ValidFragment")
 public class HistoryFragment extends Fragment implements iHistory{
     private StackedBarChart numCountStackedBarChart;
     private BarChart weightCountBarChart;
@@ -53,6 +55,10 @@ public class HistoryFragment extends Fragment implements iHistory{
             }
         }
     };
+
+    public HistoryFragment(){
+
+    }
 
     public HistoryFragment(adminGUID guid) {
         // Required empty public constructor

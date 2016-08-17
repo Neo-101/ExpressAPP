@@ -1,6 +1,7 @@
 package example.com.expressapp.setting.view;
 
 
+import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import example.com.expressapp.login.view.LoginActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
+@SuppressLint("ValidFragment")
 public class SettingFragment extends PreferenceFragment implements iSetting{
     private Button logoutButton;
     private CheckBoxPreference switchCompatPref;

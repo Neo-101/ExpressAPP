@@ -1,5 +1,6 @@
 package example.com.expressapp.setting.view;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import example.com.expressapp.setting.presenter.iPresenter;
 /**
  * Created by lxs on 2016/8/11.
  */
+@SuppressLint("ValidFragment")
 public class PersonInfoFragment extends Fragment implements iPersonInfo{
     private PersonalInfo personalInfo;
     private adminGUID mGuid;

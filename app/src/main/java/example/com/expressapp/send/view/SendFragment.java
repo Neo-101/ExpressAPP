@@ -1,6 +1,7 @@
 package example.com.expressapp.send.view;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.net.Uri;
@@ -32,6 +33,7 @@ import example.com.expressapp.send.presenter.iUpdataLadingPresenter;
 /**
  * A simple {@link Fragment} subclass.
  */
+@SuppressLint("ValidFragment")
 public class SendFragment extends Fragment implements iSend{
     private iUpdataLadingPresenter updataLading;
     private adminGUID mGuid;

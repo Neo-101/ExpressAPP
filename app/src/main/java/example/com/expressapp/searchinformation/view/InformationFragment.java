@@ -1,5 +1,6 @@
 package example.com.expressapp.searchinformation.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -27,7 +28,7 @@ import example.com.expressapp.searchinformation.model.RecyclerViewAdapter;
 import example.com.expressapp.searchinformation.presenter.GetInfoPresenterImpl;
 import example.com.expressapp.searchinformation.presenter.iGetInfoPresenter;
 
-
+@SuppressLint("ValidFragment")
 public class InformationFragment extends Fragment implements iInformation{
 
     private ActionMode mActionMode;
