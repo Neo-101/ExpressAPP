@@ -4,5 +4,6 @@
     <string name="drawer_close">关闭</string>
     <string name="checkBoxPreference">checkBoxPreference</string>
     <string name="personInfoPreference">personInfoPreference</string>
-
+    <string name="teamInfoPreference">teamInfoPreference</string>
+    <string name="teamUrl"><u>github.com/Bobo1553/ExpressAPP</u></string>
 </resources>

@@ -4,6 +4,7 @@ package example.com.expressapp.setting.view;
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
@@ -25,25 +26,11 @@ import example.com.expressapp.login.view.LoginActivity;
  */
 @SuppressLint("ValidFragment")
 public class SettingFragment extends PreferenceFragment implements iSetting{
-    private Button logoutButton;
     private CheckBoxPreference switchCompatPref;
     private Preference personInfoPref;
+    private Preference teamInfoPref;
     private adminGUID mGuid;
 
-//    private Handler handler=new Handler(){
-//        public void handleMessage(android.os.Message msg) {
-//            if(msg.what==1)
-//            {
-//                if(msg.obj.toString().equals("1")||msg.obj.toString().equals("2"))
-//                {
-//                    Intent intent=new Intent(SettingFragment.this.getActivity(), LoginActivity.class);
-//                    startActivity(intent);
-//                }
-//                else
-//                    android.util.Log.d("test","Fail "+msg.obj.toString());
-//            }
-//        };
-//    };
 
     public SettingFragment(adminGUID guid) {
         // Required empty public constructor
@@ -63,15 +50,7 @@ public class SettingFragment extends PreferenceFragment implements iSetting{
         // Inflate the layout for this fragment
         View thisView=super.onCreateView(inflater,container,savedInstanceState);
         thisView.setBackgroundResource(R.color.windowBackground);
-/*        iLogout=new LogoutPresenterImpl(this);
-        logoutButton=(Button) thisView.findViewById(R.id.setting_fragment_layout_logout_btn);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iLogout.LogoutJudge(handler);
-            }
-        });
-*/        return thisView;
+       return thisView;
     }
 
 
@@ -81,6 +60,7 @@ public class SettingFragment extends PreferenceFragment implements iSetting{
         addPreferencesFromResource(R.xml.setting_fragment_preferences);
         switchCompatPref=(CheckBoxPreference)getPreferenceManager().findPreference(getString(R.string.checkBoxPreference));
         personInfoPref=getPreferenceManager().findPreference(getString(R.string.personInfoPreference));
+        teamInfoPref=getPreferenceManager().findPreference(getString(R.string.teamInfoPreference));
         switchCompatPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -96,6 +76,15 @@ public class SettingFragment extends PreferenceFragment implements iSetting{
                 fragmentTransaction.setCustomAnimations(R.animator.fragment_slide_left_enter,R.animator.fragment_slide_right_exit);
                 fragmentTransaction.replace(R.id.basispage_layout_content,new PersonInfoFragment(mGuid)).commit();
                 Log.d("Test","click");
+                return true;
+            }
+        });
+        teamInfoPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Uri  uri = Uri.parse("https://github.com/Bobo1553/ExpressAPP");
+                Intent  intent = new  Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
                 return true;
             }
         });

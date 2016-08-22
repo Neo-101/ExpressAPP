@@ -153,7 +153,6 @@ public class SendFragment extends Fragment implements iSend{
         return thisView;
     }
 
-
     @Override
     public String getGUID() {
         return mGuid.getGUID();
@@ -164,10 +163,5 @@ public class SendFragment extends Fragment implements iSend{
         return mExpressInfoManager.getExpressInfoList().get(0).getIdNum();
     }
 
-    private void callReceiver(String telephone)
-    {
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:"+telephone));
-        startActivity(intent);
-    }
+
 }

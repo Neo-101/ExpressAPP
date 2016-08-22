@@ -1,6 +1,7 @@
 package example.com.expressapp;
 
 import android.app.Activity;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,8 @@ public class ActivityList
     private static  ArrayList<Activity> activityArrayList=new ArrayList<>();
     public static void addActivity(Activity activity)
     {
+        for(Activity temp:activityArrayList)
+        Log.d("List",temp.getLocalClassName()+",");
         activityArrayList.add(activity);
     }
     public static void removeActivity(Activity activity)

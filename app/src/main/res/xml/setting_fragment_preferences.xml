@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/windowBackground"
     android:layout="@layout/preference_item">
 
@@ -43,7 +43,8 @@
             android:icon="@drawable/ic_setting_version"/>
         <Preference
             android:layout="@layout/preference_item"
-            android:summary="NJU  GIS开发自娱自乐"
+            android:summary="@string/teamUrl"
+            android:key="@string/teamInfoPreference"
             android:title="开发团队"
             android:icon="@drawable/ic_setting_team"/>
     </PreferenceCategory>
